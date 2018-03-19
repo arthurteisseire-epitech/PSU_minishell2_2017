@@ -19,6 +19,8 @@ int my_env(char **args)
 	}
 	while (environ[i] != NULL) {
 		my_putstr(environ[i]);
+		if (!is_char_in_str('=', environ[i]))
+			my_putchar('=');
 		my_putchar('\n');
 		i++;
 	}
