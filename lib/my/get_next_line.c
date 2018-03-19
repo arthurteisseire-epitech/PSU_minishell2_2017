@@ -37,20 +37,19 @@ char *get_next_line(int fd)
 	static char buffer[READ_SIZE];
 	static char *begin = buffer;
 	char *line = NULL;
-	int len = my_strlen(begin);
 	int index;
 	int size;
 
 	if ((index = find_backspace(begin)) != -1)
 		return (cut_line(&begin, line, index));
-	else if (len != 0)
-		return (cut_line(&begin, line, len));
-	line = concat(line, begin, len);
+	line = concat(line, begin, my_strlen(begin));
 	while ((size = read(fd, buffer, READ_SIZE)) > 0) {
 		buffer[size] = '\0';
 		begin = buffer;
 		if ((index = find_backspace(begin)) != -1)
 			return (cut_line(&begin, line, index));
+		else if (my_strlen(begin) != 0)
+			return (cut_line(&begin, line, my_strlen(begin)));
 		line = concat(line, begin, my_strlen(begin));
 	}
 	free(line);
