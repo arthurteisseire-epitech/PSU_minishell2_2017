@@ -44,22 +44,23 @@ int run(void)
 {
 	char *cmd = NULL;
 	char **args;
+	int status;
 
 	while (1) {
 		my_putstr("$> ");
-		if (cmd)
-			free(cmd);
+		free(cmd);
 		cmd = get_next_line(0);
-		if (my_exit(cmd))
-			return (1);
-		args = split(cmd, " \t");
-		if (fork_and_exec(args, cmd) != 1)
+		if (want_exit(cmd))
 			return (0);
+		args = split(cmd, " \t");
+		status = fork_and_exec(args, cmd);
+		free_array(args);
+		if (status != 1)
+			return (status);
 	}
-	return (1);
 }
 
-int my_exit(char *cmd)
+int want_exit(char *cmd)
 {
 	if (cmd == NULL) {
 		my_putstr("exit\n");

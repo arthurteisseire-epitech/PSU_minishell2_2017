@@ -40,7 +40,7 @@ static int exec_with_path(char **args)
 	char *path = get_value("PATH");
 	int len_prog = my_strlen(args[0]);
 	char **paths;
-	char *cmd;
+	char *cmd = NULL;
 	int i = 0;
 
 	if (!path)
@@ -50,10 +50,11 @@ static int exec_with_path(char **args)
 		cmd = concat_with_slash(paths[i], args[0], len_prog);
 		if (access(cmd, F_OK) != -1)
 			execve(cmd, args, environ);
-		if (cmd)
-			free(cmd);
+		free(cmd);
 		i++;
 	}
+	free_array(paths);
+	free(path);
 	return (-1);
 }
 
@@ -103,7 +104,5 @@ void exec_cmd(char *cmd, char **args)
 		my_putstr(args[0]);
 		my_putstr(": Command not found.\n");
 	}
-	free_array(args);
-	if (cmd)
-		free(cmd);
+	free(cmd);
 }

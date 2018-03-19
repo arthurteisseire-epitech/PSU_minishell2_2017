@@ -23,7 +23,7 @@ extern char **environ;
 void exec_cmd(char *cmd, char **args);
 int run(void);
 int mysh(void);
-int my_exit(char *cmd);
+int want_exit(char *cmd);
 void skip_name(char **var);
 char *get_value(char *var);
 

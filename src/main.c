@@ -18,7 +18,7 @@ int main(int ac, char **av)
 		return (84);
 	}
 	status = mysh();
-	if (status == 0) {
+	if (status == -1) {
 		my_puterror("An error occured\n");
 		return (84);
 	}
