@@ -22,5 +22,6 @@ int main(int ac, char **av)
 		my_puterror("An error occured\n");
 		return (84);
 	}
-	return (0);
+	printf("status: %d\n", status);
+	return (status);
 }
