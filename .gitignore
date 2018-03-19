@@ -2,3 +2,7 @@ mysh
 *.o
 *.gcda
 *.gcno
+tester*
+tests.sample
+README
+tests
