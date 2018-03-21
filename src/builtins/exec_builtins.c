@@ -17,11 +17,11 @@ static const builtins_t builtins[NB_BUILTINS] = {
 	{"setenv", my_setenv}
 };
 
-int exec_builtins(char **args)
+int exec_builtins(sh_t *sh)
 {
 	for (int i = 0; i < NB_BUILTINS; i++)
-		if (my_strcmp(builtins[i].name, args[0]) == 0) {
-			builtins[i].f(args);
+		if (my_strcmp(builtins[i].name, sh->args[0]) == 0) {
+			builtins[i].f(sh->args);
 			return (1);
 		}
 	return (0);

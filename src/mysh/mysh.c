@@ -9,7 +9,7 @@
 #include "mysh.h"
 #include "env.h"
 
-int mysh(void)
+int mysh(sh_t *sh)
 {
-	return (run());
+	return (run(sh));
 }

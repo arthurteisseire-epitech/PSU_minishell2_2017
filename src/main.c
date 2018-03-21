@@ -10,18 +10,20 @@
 
 int main(int ac, char **av)
 {
+	sh_t sh;
 	int status;
 
+	sh.rvalue = 0;
 	if (ac != 1) {
 		my_puterror(av[0]);
 		my_puterror(": The program must take one argument\n");
 		return (84);
 	}
-	status = mysh();
+	status = mysh(&sh);
 	if (status == -1) {
-		my_puterror("An error occured\n");
+		my_puterror("\nAn error occured\n");
 		return (84);
 	}
-	printf("status: %d\n", status);
-	return (status);
+	printf("RETURN VALUE: %d\n", sh.rvalue);
+	return (sh.rvalue);
 }

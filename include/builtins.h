@@ -12,12 +12,14 @@
 
 #define NB_BUILTINS 4
 
+typedef struct sh sh_t;
+
 typedef struct builtins {
 	char *name;
 	int (*f)(char **args);
 } builtins_t;
 
 int cd(char **args);
-int exec_builtins(char **args);
+int exec_builtins(sh_t *sh);
 
 #endif
