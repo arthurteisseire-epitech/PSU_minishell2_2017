@@ -34,7 +34,7 @@ char*	my_strcat(char *dest, char const *src);
 char*	my_strncat(char *dest, char const *src, int const n);
 int	nb_len(int nb);
 char*	my_itoa(int nb);
-void	free_2d(char **array);
+void	free_array(char **array);
 char	*my_strndup(char const *str, const int size);
 char*	get_env_value(char **env, char const *var);
 int	my_str_isnum(char const *str);
