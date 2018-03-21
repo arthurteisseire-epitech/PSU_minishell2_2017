@@ -27,13 +27,14 @@ SRC	=	my_strlen.c \
 		my_atoi.c \
 		my_itoa.c \
 		concat.c \
+		free_array.c \
 		get_next_line.c \
 		split.c \
 		my_strndup.c \
 		get_env_value.c \
 		my_arrlen.c \
-		free_array.c \
 		my_arrcpy.c \
+		count_flags.c \
 		rm_arrelem.c
 
 CFLAGS	+=	-Wall -W -Wextra
