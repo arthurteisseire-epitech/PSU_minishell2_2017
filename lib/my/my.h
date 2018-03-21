@@ -42,5 +42,7 @@ int     my_arrlen(void **data);
 char**  my_arrcpy(char const **array);
 void	rm_arrelem(void **array, int index, void (*free_fun)(void *ptr));
 int	count_flags(char const *str, char const *flags);
+int	count_endflags(char const *str, char const *flags);
+char*	my_strip(char **str, char const *flags);
 
 #endif
