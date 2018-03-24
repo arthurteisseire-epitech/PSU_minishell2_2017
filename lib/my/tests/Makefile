@@ -5,6 +5,7 @@
 ## Arthur Teisseire
 ##
 
+CC	=	gcc
 DSRC_UT	=	./
 DLIB	=	../
 INC	=	$(DLIB)
@@ -49,7 +50,7 @@ NAME	=	units
 all: $(NAME)
 
 $(NAME):
-	gcc -o $(NAME) $(SRC) $(SRC_UT) $(CFLAGS) $(LDFLAGS)
+	$(CC) -o $(NAME) $(SRC) $(SRC_UT) $(CFLAGS) $(LDFLAGS)
 
 clean:
 	rm -f $(OBJ)

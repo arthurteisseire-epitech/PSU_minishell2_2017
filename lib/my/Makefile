@@ -35,7 +35,8 @@ SRC	=	my_strlen.c \
 		free_array.c \
 		my_arrcpy.c \
 		count_flags.c \
-		rm_arrelem.c
+		rm_arrelem.c \
+		apply_on_array.c
 
 CFLAGS	+=	-Wall -W -Wextra
 OBJ	=	$(SRC:.c=.o)

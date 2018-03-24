@@ -12,6 +12,8 @@ char *my_strndup(char const *str, const int size)
 	int i = 0;
 	char *new_str = malloc(sizeof(char) * (size + 1));
 
+	if (new_str == NULL)
+		return (NULL);
 	while (i < size && str[i] != '\0') {
 		new_str[i] = str[i];
 		i++;
