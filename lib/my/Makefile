@@ -8,36 +8,39 @@
 CC	=	gcc
 INC	=	my.h
 DTESTS	=	tests/
+DSRC	=	./
 
-SRC	=	my_strlen.c \
-		my_putchar.c \
-		my_putstr.c \
-		my_puterror.c \
-		my_put_nbr.c \
-		my_putnbr_base.c \
-		my_strcmp.c \
-		my_strncmp.c \
-		my_str_isalphanum.c \
-		my_str_isnum.c \
-		my_strcpy.c \
-		my_strncpy.c \
-		my_strcat.c \
-		my_strncat.c \
-		my_strdup.c \
-		my_atoi.c \
-		my_itoa.c \
-		concat.c \
-		get_next_line.c \
-		split.c \
-		my_strndup.c \
-		get_env_value.c \
-		my_arrlen.c \
-		free_array.c \
-		my_arrcpy.c \
-		count_flags.c \
-		rm_arrelem.c \
-		apply_on_array.c \
-		free_and_set.c
+SRC	=	$(DSRC)apply_on_array.c		\
+		$(DSRC)concat.c			\
+		$(DSRC)count_endflags.c		\
+		$(DSRC)count_flags.c		\
+		$(DSRC)free_and_set.c		\
+		$(DSRC)free_array.c		\
+		$(DSRC)get_env_value.c 		\
+		$(DSRC)get_next_line.c 		\
+		$(DSRC)my_arrcpy.c		\
+		$(DSRC)my_arrlen.c		\
+		$(DSRC)my_atoi.c		\
+		$(DSRC)my_itoa.c		\
+		$(DSRC)my_put_nbr.c		\
+		$(DSRC)my_putchar.c		\
+		$(DSRC)my_puterror.c		\
+		$(DSRC)my_putnbr_base.c		\
+		$(DSRC)my_putstr.c		\
+		$(DSRC)my_str_isalphanum.c	\
+		$(DSRC)my_str_isnum.c		\
+		$(DSRC)my_strcat.c		\
+		$(DSRC)my_strcmp.c		\
+		$(DSRC)my_strcpy.c		\
+		$(DSRC)my_strdup.c		\
+		$(DSRC)my_strip.c		\
+		$(DSRC)my_strlen.c		\
+		$(DSRC)my_strncat.c		\
+		$(DSRC)my_strncmp.c		\
+		$(DSRC)my_strncpy.c		\
+		$(DSRC)my_strndup.c		\
+		$(DSRC)rm_arrelem.c		\
+		$(DSRC)split.c
 
 CFLAGS	+=	-Wall -W -Wextra
 OBJ	=	$(SRC:.c=.o)
