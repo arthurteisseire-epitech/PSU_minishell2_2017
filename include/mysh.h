@@ -18,6 +18,11 @@
 #define SEGFAULT 11
 #define DIVZERO 8
 
+typedef struct cmd {
+	int (*exec)(char **left, char **right);
+	char **args;
+} cmd_t;
+
 typedef struct sh {
 	int rvalue;
 	char **args;

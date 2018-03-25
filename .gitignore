@@ -6,3 +6,5 @@ tester*
 tests.sample
 README
 tests
+main.c
+a.out

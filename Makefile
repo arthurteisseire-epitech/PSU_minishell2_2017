@@ -8,14 +8,20 @@
 CC	=	gcc
 DSRC	=	$(realpath src)/
 INC	=	$(realpath include)
-DLIB	=	$(realpath lib/my)/
+
+DLIB	=	$(realpath lib)/
+DMY	=	$(DLIB)my
+DTREE	=	$(DLIB)tree
 DTESTS	=	$(realpath tests)/
-LIB	=	my
-LIBS	=	-L$(DLIB) -l$(LIB)
+MY	=	my
+TREE	=	tree
+LIBS	=	-L$(DMY) -l$(MY) -L$(DTREE) -l$(TREE)
+
 DENV	=	$(DSRC)env/
 DBUILTS	=	$(DSRC)builtins/
 DMYSH	=	$(DSRC)mysh/
 DARGS	=	$(DSRC)args/
+
 SRC     =	$(DSRC)main.c \
 		$(DMYSH)mysh.c \
 		$(DMYSH)run.c \
@@ -37,15 +43,18 @@ NAME	=	mysh
 all: $(NAME)
 
 $(NAME):	$(OBJ)
-	make -C $(DLIB)
+	make -C $(DMY)
+	make -C $(DTREE)
 	$(CC) -o $(NAME) $(OBJ) $(LIBS)
 
 clean:
-	make clean -C $(DLIB)
+	make clean -C $(DMY)
+	make clean -C $(DTREE)
 	rm -f $(OBJ)
 
 fclean: clean
-	make fclean -C $(DLIB)
+	make fclean -C $(DMY)
+	make fclean -C $(DTREE)
 	rm -f $(NAME)
 
 re: fclean all
