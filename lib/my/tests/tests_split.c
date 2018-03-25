@@ -20,21 +20,6 @@ Test(split, get_next_word)
 	cr_assert_eq(res, NULL);
 }
 
-/*
- *Test(split, skip_first_flags)
- *{
- *        char *got = my_strdup("      lala ");
- *        char *got2 = my_strdup("      ");
- *        char *expected = "lala ";
- *        char *expected2 = "";
- *
- *        skip_first_flags(&got, " ");
- *        cr_assert_str_eq(got, expected);
- *        skip_first_flags(&got2, " ");
- *        cr_assert_str_eq(got2, expected2);
- *}
- */
-
 Test(split, count_words)
 {
 	cr_assert_eq(count_words("un deux trois", " "), 3);
