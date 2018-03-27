@@ -26,8 +26,6 @@ static char *get_path(void)
 
 	for (int i = 0; i < 4096; i++)
 		buff[i] = '\0';
-	if (buff == NULL)
-		return (NULL);
 	if ((path = my_strdup(getcwd(buff, sizeof(buff)))) != NULL)
 		return (path);
 	my_puterror("Path too long.\n");

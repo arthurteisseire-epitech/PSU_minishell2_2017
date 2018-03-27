@@ -5,10 +5,11 @@
 ** by Arthur Teisseire
 */
 
+#include "btree.h"
 #include "my.h"
 #include "mysh.h"
 
-int main(int ac, char **av)
+int main_old(int ac, char **av)
 {
 	sh_t sh;
 	int status;
@@ -26,4 +27,25 @@ int main(int ac, char **av)
 	}
 	printf("RETURN VALUE: %d\n", sh.rvalue);
 	return (sh.rvalue);
+}
+
+int dispf(void *data)
+{
+	my_putstr(data);
+	my_putchar('\n');
+	return (0);
+}
+
+int main(void)
+{
+	char *s = get_next_line(0);
+	char *curr = get_next_word(&s, ";");
+	btree_t *root = btree_create_node(";");
+
+	while (curr != NULL) {
+		btree_insert_data(root, my_strip(&curr, " \t"), my_strcmp);
+		curr = get_next_word(&s, ";");
+	}
+	btree_apply_prefix(root, dispf);
+	return (0);
 }

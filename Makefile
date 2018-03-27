@@ -20,21 +20,23 @@ LIBS	=	-L$(DMY) -l$(MY) -L$(DTREE) -l$(TREE)
 DENV	=	$(DSRC)env/
 DBUILTS	=	$(DSRC)builtins/
 DMYSH	=	$(DSRC)mysh/
-DARGS	=	$(DSRC)args/
+DERROR	=	$(DSRC)error/
+DEXEC	=	$(DSRC)exec/
 
-SRC     =	$(DSRC)main.c \
-		$(DMYSH)mysh.c \
-		$(DMYSH)run.c \
-		$(DMYSH)exec_cmd.c \
-		$(DARGS)my_perror.c \
-		$(DENV)env.c \
-		$(DENV)add_var.c \
-		$(DENV)concat_args.c \
-		$(DENV)get_var.c \
-		$(DENV)index_name.c \
-		$(DENV)remove_var.c \
-		$(DENV)set_value.c \
-		$(DBUILTS)cd.c \
+SRC     =	$(DSRC)main.c			\
+		$(DEXEC)get_token.c		\
+		$(DMYSH)mysh.c			\
+		$(DMYSH)run.c			\
+		$(DMYSH)exec_cmd.c		\
+		$(DERROR)my_perror.c		\
+		$(DENV)env.c			\
+		$(DENV)add_var.c		\
+		$(DENV)concat_args.c		\
+		$(DENV)get_var.c		\
+		$(DENV)index_name.c		\
+		$(DENV)remove_var.c		\
+		$(DENV)set_value.c		\
+		$(DBUILTS)cd.c			\
 		$(DBUILTS)exec_builtins.c
 CFLAGS	+=	-Wall -W -Wextra -I$(INC) -g
 OBJ	=	$(SRC:.c=.o)

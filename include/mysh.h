@@ -15,10 +15,12 @@
 #include <stdio.h>
 #include <dirent.h>
 
+#define NB_TOKENS 0
 #define SEGFAULT 11
 #define DIVZERO 8
 
 typedef struct cmd {
+	int pipefd[2];
 	int (*exec)(char **left, char **right);
 	char **args;
 } cmd_t;

@@ -8,3 +8,5 @@ README
 tests
 main.c
 a.out
+*.a
+*.swp
