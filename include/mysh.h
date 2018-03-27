@@ -27,12 +27,13 @@ typedef struct cmd {
 
 typedef struct sh {
 	int rvalue;
-	char **args;
+	char **cmd;
 } sh_t;
 
 extern char **environ;
 
-int exec_cmd(sh_t *sh);
+int store_pipe(cmd_t *cmd, char **str);
+int exec_cmd(char **cmd);
 int run(sh_t *sh);
 int mysh(sh_t *sh);
 int call_exit(char *cmd);

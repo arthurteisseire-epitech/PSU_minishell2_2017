@@ -25,6 +25,7 @@ DEXEC	=	$(DSRC)exec/
 
 SRC     =	$(DSRC)main.c			\
 		$(DEXEC)get_token.c		\
+		$(DEXEC)store_pipe.c		\
 		$(DMYSH)mysh.c			\
 		$(DMYSH)run.c			\
 		$(DMYSH)exec_cmd.c		\

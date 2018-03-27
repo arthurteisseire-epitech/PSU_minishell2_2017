@@ -20,8 +20,8 @@ static const builtins_t builtins[NB_BUILTINS] = {
 int exec_builtins(sh_t *sh)
 {
 	for (int i = 0; i < NB_BUILTINS; i++)
-		if (my_strcmp(builtins[i].name, sh->args[0]) == 0) {
-			builtins[i].f(sh->args);
+		if (my_strcmp(builtins[i].name, sh->cmd[0]) == 0) {
+			builtins[i].f(sh->cmd);
 			return (1);
 		}
 	return (0);

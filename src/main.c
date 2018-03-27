@@ -29,23 +29,43 @@ int main_old(int ac, char **av)
 	return (sh.rvalue);
 }
 
-int dispf(void *data)
-{
-	my_putstr(data);
-	my_putchar('\n');
-	return (0);
-}
-
 int main(void)
 {
-	char *s = get_next_line(0);
-	char *curr = get_next_word(&s, ";");
-	btree_t *root = btree_create_node(";");
+	cmd_t cmd;
+	char *str_left[] = {"/bin/ls", "-l", NULL};
+	char *str_right[] = {"/bin/grep", "a", NULL};
+	char *str_end[] = {"/bin/cat", "-e", NULL};
+	char buff[1];
 
-	while (curr != NULL) {
-		btree_insert_data(root, my_strip(&curr, " \t"), my_strcmp);
-		curr = get_next_word(&s, ";");
-	}
-	btree_apply_prefix(root, dispf);
+	cmd.pipefd[0] = 0;
+	cmd.pipefd[1] = 1;
+	store_pipe(&cmd, str_left);
+	store_pipe(&cmd, str_right);
+	store_pipe(&cmd, str_end);
+	while (read(cmd.pipefd[0], buff, 1) != 0)
+		write(1, buff, 1);
+	close(cmd.pipefd[0]);
 	return (0);
 }
+/*
+ *int dispf(void *data)
+ *{
+ *        my_putstr(data);
+ *        my_putchar('\n');
+ *        return (0);
+ *}
+ *
+ *int main(void)
+ *{
+ *        char *s = get_next_line(0);
+ *        char *curr = get_next_word(&s, ";");
+ *        btree_t *root = btree_create_node(";");
+ *
+ *        while (curr != NULL) {
+ *                btree_insert_data(root, my_strip(&curr, " \t"), my_strcmp);
+ *                curr = get_next_word(&s, ";");
+ *        }
+ *        btree_apply_prefix(root, dispf);
+ *        return (0);
+ *}
+ */

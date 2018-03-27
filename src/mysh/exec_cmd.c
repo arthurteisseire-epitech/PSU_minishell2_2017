@@ -87,21 +87,21 @@ static int right_ok(char *pathname)
 	return (1);
 }
 
-int exec_cmd(sh_t *sh)
+int exec_cmd(char **cmd)
 {
 	int status = -1;
 
-	if (sh->args && sh->args[0] && access(sh->args[0], F_OK) != -1) {
-		if (!right_ok(sh->args[0]))
+	if (cmd && cmd[0] && access(cmd[0], F_OK) != -1) {
+		if (!right_ok(cmd[0]))
 			return (-1);
-		status = execve(sh->args[0], sh->args, environ);
+		status = execve(cmd[0], cmd, environ);
 	}
-	if (wrong_arch(sh->args[0]))
+	if (wrong_arch(cmd[0]))
 		return (-1);
-	if (status == -1 && my_strcmp(sh->args[0], "") != 0)
-		status = exec_with_path(sh->args);
-	if (status == -1 && sh->args[0] != NULL) {
-		my_putstr(sh->args[0]);
+	if (status == -1 && my_strcmp(cmd[0], "") != 0)
+		status = exec_with_path(cmd);
+	if (status == -1 && cmd[0] != NULL) {
+		my_putstr(cmd[0]);
 		my_putstr(": Command not found.\n");
 		return (1);
 	}
