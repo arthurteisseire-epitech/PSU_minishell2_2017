@@ -11,7 +11,7 @@
 
 static const dicf_t tokens[NB_TOKENS] = {
 	/*{";", exec_cmd},*/
-	/*{"|", exec_pipe},*/
+	/*{"|", store_pipe},*/
 	/*{"<", exec_redir_left},*/
 	/*{"<<", exec_redir2_left},*/
 	/*{">", exec_redir_right},*/
