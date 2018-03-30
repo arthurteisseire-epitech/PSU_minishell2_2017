@@ -24,7 +24,8 @@ int	apply_on_array(void **array, int (*applyf)());
 void	free_and_set(void **ptr, void *new_ptr);
 void*	my_memcpy(void *dest, void *src, int size);
 
-int	write_in_file(int fd_in, char *pathname, int flag_open);
+int	write_in_file(char *pathname, int fd_in, int flag_open);
+void	my_fdcpy(int fd_dest, int fd_src);
 
 void	my_putchar(char const c);
 void	my_puterror(char const *str);

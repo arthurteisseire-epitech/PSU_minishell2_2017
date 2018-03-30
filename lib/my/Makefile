@@ -56,6 +56,7 @@ SRC	=	$(DPUT)my_put_nbr.c		\
 		$(DSRC)get_next_line.c 		\
 		$(DENV)get_env_value.c		\
 		$(DENV)index_name.c		\
+		$(DFILE)my_fdcpy.c		\
 		$(DFILE)write_in_file.c
 
 CFLAGS	+=	-Wall -W -Wextra -I$(INC)
