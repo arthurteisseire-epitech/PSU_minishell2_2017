@@ -38,7 +38,13 @@ SRC	=	$(DPUT)my_put_nbr.c		\
 		$(DSTRING)my_itoa.c		\
 		$(DSTRING)concat.c		\
 		$(DSTRING)get_next_to.c		\
+		$(DSTRING)get_before_to.c	\
 		$(DSTRING)bufferize.c		\
+		$(DSTRING)my_strstr.c		\
+		$(DSTRING)get_next_word.c	\
+		$(DSTRING)is_char_in_str.c	\
+		$(DSTRING)len_to_flags.c	\
+		$(DSTRING)count_words.c		\
 		$(DARRAY)my_memcpy.c		\
 		$(DARRAY)my_arrlen.c		\
 		$(DARRAY)my_arrdup.c		\

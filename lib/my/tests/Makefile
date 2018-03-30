@@ -15,6 +15,7 @@ DSTRING	=	$(DSRC)string/
 DPUT	=	$(DSRC)put/
 DENV	=	$(DSRC)env/
 DARRAY	=	$(DSRC)array/
+DFILE	=	$(DSRC)file/
 
 SRC	=	$(DPUT)my_put_nbr.c		\
 		$(DPUT)my_putchar.c		\
@@ -39,8 +40,16 @@ SRC	=	$(DPUT)my_put_nbr.c		\
 		$(DSTRING)my_itoa.c		\
 		$(DSTRING)concat.c		\
 		$(DSTRING)get_next_to.c		\
-		$(DARRAY)my_arrcpy.c		\
+		$(DSTRING)get_before_to.c	\
+		$(DSTRING)bufferize.c		\
+		$(DSTRING)my_strstr.c		\
+		$(DSTRING)get_next_word.c	\
+		$(DSTRING)is_char_in_str.c	\
+		$(DSTRING)len_to_flags.c	\
+		$(DSTRING)count_words.c		\
+		$(DARRAY)my_memcpy.c		\
 		$(DARRAY)my_arrlen.c		\
+		$(DARRAY)my_arrdup.c		\
 		$(DARRAY)apply_on_array.c	\
 		$(DARRAY)rm_arrelem.c		\
 		$(DARRAY)free_and_set.c		\
@@ -48,7 +57,8 @@ SRC	=	$(DPUT)my_put_nbr.c		\
 		$(DARRAY)split.c		\
 		$(DSRC)get_next_line.c 		\
 		$(DENV)get_env_value.c		\
-		$(DENV)index_name.c
+		$(DENV)index_name.c		\
+		$(DFILE)write_in_file.c
 
 SRC_UT	=	$(DSRC_UT)redirect.c		\
 		$(DSRC_UT)tests_output.c	\
@@ -59,6 +69,7 @@ SRC_UT	=	$(DSRC_UT)redirect.c		\
 		$(DSRC_UT)tests_split.c		\
 		$(DSRC_UT)tests_get_next_line.c	\
 		$(DSRC_UT)tests_get_next_to.c	\
+		$(DSRC_UT)tests_my_strstr.c	\
 		$(DSRC_UT)tests_cmp.c
 
 LIB	=	my

@@ -9,6 +9,8 @@ int my_str_isnum(char const *str)
 {
 	int i = 0;
 
+	if (str[0] == '-')
+		i++;
 	while (str[i] != '\0') {
 		if (str[i] >= '0' && str[i] <= '9')
 			i++;

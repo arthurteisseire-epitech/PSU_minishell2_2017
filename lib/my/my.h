@@ -22,7 +22,7 @@ void	my_arrcpy(void **dest, void const **array);
 void	rm_arrelem(void **array, int index, void (*free_fun)(void *ptr));
 int	apply_on_array(void **array, int (*applyf)());
 void	free_and_set(void **ptr, void *new_ptr);
-void	*my_memcpy(void *dest, void *src, int size);
+void*	my_memcpy(void *dest, void *src, int size);
 
 int	write_in_file(int fd_in, char *pathname, int flag_open);
 
@@ -41,20 +41,22 @@ int	my_str_isalphanum(char const *str);
 char*	my_strdup(char const *str);
 int	my_strcmp(char const *s1, char const *s2);
 int	my_strncmp(char const *s1, char const *s2, int const n);
-int	count_words(char *str, char const *flags);
+int	count_words(char const *str, char const *flags);
 int	is_char_in_str(char const c, char const *str);
-int	len_first_word(char *str, char const *flags);
+int	len_to_flags(char const *str, char const *flags);
 char*	concat(char *dest, char *src, int len_src);
 char*	my_strcat(char *dest, char const *src);
 char*	my_strncat(char *dest, char const *src, int const n);
 int	nb_len(int nb);
 char*	my_itoa(int nb);
 int	my_str_isnum(char const *str);
-char	*my_strndup(char const *str, const int size);
+char*	my_strndup(char const *str, const int size);
 int	count_flags(char const *str, char const *flags);
 int	count_endflags(char const *str, char const *flags);
 char*	my_strip(char **str, char const *flags);
 char*	get_next_to(char const *str, char const *flags);
+char*	get_before_to(char const *str, char const *flags);
 void	bufferize(char *str);
+char*	my_strstr(char const *haystack, char const *needle);
 
 #endif
