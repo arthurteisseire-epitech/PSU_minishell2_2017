@@ -14,7 +14,7 @@ int index_name(char *var_name, char **env)
 	char *env_name;
 
 	while (env[i] != NULL) {
-		env_name = get_next_to(env[i], "=");
+		env_name = get_before_to(env[i], "=");
 		if (env_name == NULL)
 			return (-1);
 		if (my_strcmp(env_name, var_name) == 0) {
