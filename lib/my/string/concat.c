@@ -8,26 +8,17 @@
 #include <stdlib.h>
 #include "my.h"
 
-char *concat(char *dest, char *src, int len_src)
+char *concat(char *left, char *right, int len_right)
 {
-	int len_dest = my_strlen(dest);
-	char *res = malloc(sizeof(char) * (len_dest + len_src + 1));
-	int i = 0;
+	int len_left = my_strlen(left);
+	char *res = malloc(sizeof(char) * (len_left + len_right + 1));
 
 	if (res == NULL)
 		return (NULL);
-	if (dest != NULL) {
-		while (dest[i] != '\0') {
-			res[i] = dest[i];
-			i++;
-		}
-		free(dest);
-	}
-	i = 0;
-	while (i < len_src) {
-		res[len_dest + i] = src[i];
-		i++;
-	}
-	res[len_dest + i] = '\0';
+	if (left != NULL)
+		my_strcpy(res, left);
+	free(left);
+	if (right != NULL)
+		my_strcat(res, right);
 	return (res);
 }

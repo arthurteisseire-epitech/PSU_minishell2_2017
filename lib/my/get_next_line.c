@@ -40,8 +40,6 @@ char *get_next_line(int fd)
 	int index;
 	int size;
 
-	if ((index = find_backspace(begin)) != -1)
-		return (cut_line(&begin, line, index));
 	line = concat(line, begin, my_strlen(begin));
 	while ((size = read(fd, buffer, READ_SIZE)) > 0) {
 		buffer[size] = '\0';
