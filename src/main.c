@@ -39,9 +39,9 @@ int main(void)
 
 	cmd.pipefd[0] = 0;
 	cmd.pipefd[1] = 1;
-	store_pipe(&cmd, str_left);
-	store_pipe(&cmd, str_right);
-	store_pipe(&cmd, str_end);
+	execout_to_pipe(&cmd, str_left);
+	execout_to_pipe(&cmd, str_right);
+	execout_to_pipe(&cmd, str_end);
 	while (read(cmd.pipefd[0], buff, 1) != 0)
 		write(1, buff, 1);
 	close(cmd.pipefd[0]);

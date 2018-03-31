@@ -32,7 +32,7 @@ typedef struct sh {
 
 extern char **environ;
 
-int store_pipe(cmd_t *cmd, char **str);
+int execout_to_pipe(cmd_t *cmd, char **str);
 int exec_cmd(char **cmd);
 int run(sh_t *sh);
 int mysh(sh_t *sh);

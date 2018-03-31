@@ -9,7 +9,7 @@
 #include "mysh.h"
 #include "my.h"
 
-int store_pipe(cmd_t *cmd, char **str)
+int execout_to_pipe(cmd_t *cmd, char **str)
 {
 	int child_pid;
 	int oldread = cmd->pipefd[0];
