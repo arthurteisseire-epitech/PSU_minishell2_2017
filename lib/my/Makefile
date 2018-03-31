@@ -53,6 +53,7 @@ SRC	=	$(DPUT)my_put_nbr.c		\
 		$(DARRAY)free_and_set.c		\
 		$(DARRAY)free_array.c		\
 		$(DARRAY)split.c		\
+		$(DARRAY)array_to_str.c		\
 		$(DSRC)get_next_line.c 		\
 		$(DENV)get_env_value.c		\
 		$(DENV)index_name.c		\

@@ -16,6 +16,7 @@ char*	get_env_value(char **env, char const *var);
 int	index_name(char *var_name, char **env);
 
 char**	split(char *str, char const *flags);
+char*	array_to_str(char **array, char *between);
 void	free_array(char **array);
 int     my_arrlen(void **data);
 void	my_arrcpy(void **dest, void const **array);

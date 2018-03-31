@@ -55,6 +55,7 @@ SRC	=	$(DPUT)my_put_nbr.c		\
 		$(DARRAY)free_and_set.c		\
 		$(DARRAY)free_array.c		\
 		$(DARRAY)split.c		\
+		$(DARRAY)array_to_str.c		\
 		$(DSRC)get_next_line.c 		\
 		$(DENV)get_env_value.c		\
 		$(DENV)index_name.c		\
@@ -71,6 +72,7 @@ SRC_UT	=	$(DSRC_UT)redirect.c		\
 		$(DSRC_UT)tests_get_next_line.c	\
 		$(DSRC_UT)tests_get_next_to.c	\
 		$(DSRC_UT)tests_my_strstr.c	\
+		$(DSRC_UT)tests_array_to_str.c	\
 		$(DSRC_UT)tests_cmp.c
 
 LIB	=	my
