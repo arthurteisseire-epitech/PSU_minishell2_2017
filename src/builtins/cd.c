@@ -8,15 +8,6 @@
 #include "my.h"
 #include "mysh.h"
 
-static int is_null(char **args)
-{
-	if (args == NULL)
-		return (1);
-	if (args[0] == NULL)
-		return (1);
-	return (0);
-}
-
 static char *get_path(void)
 {
 	char buff[4096];
@@ -48,11 +39,10 @@ int cd(char **args)
 	int i = 0;
 	int status;
 
-	if (is_null(args))
+	if (args == NULL || args[0] == NULL)
 		return (-1);
-	while (args[i] != NULL)
-		i++;
-	if (i >= 3) {
+	i += my_arrlen((void **)args);
+	if (i > 2) {
 		my_puterror("cd: Too many arguments.\n");
 		return (-1);
 	}
