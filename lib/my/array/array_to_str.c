@@ -20,7 +20,8 @@ char *array_to_str(char **array, char *between)
 	if (res == NULL)
 		return (NULL);
 	while (array[i] != NULL) {
-		res = concat(res, between, len_between);
+		if (len_between != 0)
+			res = concat(res, between, len_between);
 		res = concat(res, array[i], my_strlen(array[i]));
 		if (res == NULL)
 			return (NULL);
