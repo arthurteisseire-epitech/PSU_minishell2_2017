@@ -12,6 +12,7 @@ DTESTS	=	tests/
 SRC	=	btree_apply_infix.c \
 		btree_apply_prefix.c \
 		btree_apply_suffix.c \
+		btree_apply_nodes.c \
 		btree_create_node.c \
 		btree_insert_data.c \
 		btree_search_item.c \
