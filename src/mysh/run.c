@@ -50,11 +50,11 @@ int run(sh_t *sh)
 
 	while (1) {
 		my_putstr("$> ");
-		free(line);
 		line = get_next_line(0);
 		if (call_exit(line))
 			return (sh->rvalue);
 		sh->cmd = split(line, " \t");
+		free(line);
 		status = fork_and_exec(sh);
 		free_array(sh->cmd);
 		if (status != 2) {

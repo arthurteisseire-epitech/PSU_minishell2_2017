@@ -19,6 +19,7 @@ char *concat(char *left, char *right, int len_right)
 		my_strcpy(res, left);
 	free(left);
 	if (right != NULL)
-		my_strcat(res, right);
+		my_memcpy(res, right, len_right);
+	res[len_left + len_right] = '\0';
 	return (res);
 }
