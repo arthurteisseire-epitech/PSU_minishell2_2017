@@ -34,13 +34,15 @@ static char *get_path(void)
 
 static void set_env_pwd(void)
 {
-	char *new_pwd[3] = {"PWD", NULL, NULL};
-	char *old_pwd[3] = {"OLDPWD", NULL, NULL};
+	char *pwd = get_env_value("PWD", environ);
+	char *path = get_path();
 
-	new_pwd[1] = get_path();
-	old_pwd[1] = get_value("PWD");
-	set_value(new_pwd);
-	set_value(old_pwd);
+	if (my_strcmp(pwd, path) != 0) {
+		set_env_value("OLDPWD", pwd, environ);
+		set_env_value("PWD", path, environ);
+	}
+	free(pwd);
+	free(path);
 }
 
 int cd(char **args)
@@ -57,9 +59,9 @@ int cd(char **args)
 		return (-1);
 	}
 	if (i == 1)
-		status = chdir(get_value("HOME"));
+		status = chdir(get_env_value("HOME", environ));
 	else if (my_strcmp(args[1], "-") == 0)
-		status = chdir(get_value("OLDPWD"));
+		status = chdir(get_env_value("OLDPWD", environ));
 	else
 		status = chdir(args[1]);
 	status == -1 ? my_perror(args[1]) : set_env_pwd();

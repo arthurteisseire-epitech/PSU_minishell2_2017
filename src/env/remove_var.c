@@ -11,7 +11,7 @@
 
 int remove_var(char **args)
 {
-	int index = index_name(args[0]);
+	int index = index_name(args[0], environ);
 
 	rm_arrelem((void *)environ, index, NULL);
 	return (0);

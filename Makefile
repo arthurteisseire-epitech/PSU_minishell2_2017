@@ -32,11 +32,7 @@ SRC     =	$(DSRC)main.c			\
 		$(DERROR)my_perror.c		\
 		$(DENV)env.c			\
 		$(DENV)add_var.c		\
-		$(DENV)concat_args.c		\
-		$(DENV)get_var.c		\
-		$(DENV)index_name.c		\
 		$(DENV)remove_var.c		\
-		$(DENV)set_value.c		\
 		$(DBUILTS)cd.c			\
 		$(DBUILTS)exec_builtins.c
 CFLAGS	+=	-Wall -W -Wextra -I$(INC) -g

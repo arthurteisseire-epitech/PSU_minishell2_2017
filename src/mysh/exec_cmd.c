@@ -37,7 +37,7 @@ static char *concat_with_slash(char *dest, char *src, int len_src)
 
 static int exec_with_path(char **args)
 {
-	char *path = get_value("PATH");
+	char *path = get_env_value("PATH", environ);
 	int len_prog = my_strlen(args[0]);
 	char **paths;
 	char *cmd = NULL;

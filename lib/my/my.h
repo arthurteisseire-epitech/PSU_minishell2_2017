@@ -12,7 +12,7 @@
 
 char*	get_next_line(int fd);
 
-char*	get_env_value(char **env, char const *var);
+char*	get_env_value(char const *var, char **env);
 int	index_name(char *var_name, char **env);
 void	disp_env(char **env);
 int	set_env_value(char *name, char *new_value, char **env);

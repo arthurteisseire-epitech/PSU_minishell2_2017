@@ -38,6 +38,5 @@ int run(sh_t *sh);
 int mysh(sh_t *sh);
 int call_exit(char *cmd);
 void skip_name(char **var);
-char *get_value(char *var);
 
 #endif

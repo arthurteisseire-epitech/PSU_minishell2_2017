@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include "my.h"
 
-char *get_env_value(char **env, char const *var)
+char *get_env_value(char const *var, char **env)
 {
 	int i = 0;
 	char *curr_var = NULL;

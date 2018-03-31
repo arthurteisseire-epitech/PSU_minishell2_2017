@@ -11,19 +11,11 @@
 
 int my_env(char **args)
 {
-	int i = 0;
-
 	if (args[1]) {
 		my_puterror("No argument for env, thanks\n");
 		return (-1);
 	}
-	while (environ[i] != NULL) {
-		my_putstr(environ[i]);
-		if (!is_char_in_str('=', environ[i]))
-			my_putchar('=');
-		my_putchar('\n');
-		i++;
-	}
+	disp_env(environ);
 	return (0);
 }
 
@@ -43,7 +35,7 @@ int my_setenv(char **args)
 		"alphanumeric characters.\n");
 		return (-1);
 	}
-	if (set_value(&args[1]) == -1)
+	if (set_env_value(args[1], args[2], environ) == -1)
 		add_var(&args[1]);
 	return (0);
 }

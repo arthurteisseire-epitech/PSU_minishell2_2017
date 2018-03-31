@@ -9,7 +9,7 @@
 #include "my.h"
 #include "mysh.h"
 
-int main_old(int ac, char **av)
+int main(int ac, char **av)
 {
 	sh_t sh;
 	int status;
@@ -29,24 +29,26 @@ int main_old(int ac, char **av)
 	return (sh.rvalue);
 }
 
-int main(void)
-{
-	cmd_t cmd;
-	char *str_left[] = {"/bin/ls", "-l", NULL};
-	char *str_right[] = {"/bin/grep", "a", NULL};
-	char *str_end[] = {"/bin/cat", "-e", NULL};
-	char buff[1];
-
-	cmd.pipefd[0] = 0;
-	cmd.pipefd[1] = 1;
-	execout_to_pipe(&cmd, str_left);
-	execout_to_pipe(&cmd, str_right);
-	execout_to_pipe(&cmd, str_end);
-	while (read(cmd.pipefd[0], buff, 1) != 0)
-		write(1, buff, 1);
-	close(cmd.pipefd[0]);
-	return (0);
-}
+/*
+ *int main(void)
+ *{
+ *        cmd_t cmd;
+ *        char *str_left[] = {"/bin/ls", "-l", NULL};
+ *        char *str_right[] = {"/bin/grep", "a", NULL};
+ *        char *str_end[] = {"/bin/cat", "-e", NULL};
+ *        char buff[1];
+ *
+ *        cmd.pipefd[0] = 0;
+ *        cmd.pipefd[1] = 1;
+ *        execout_to_pipe(&cmd, str_left);
+ *        execout_to_pipe(&cmd, str_right);
+ *        execout_to_pipe(&cmd, str_end);
+ *        while (read(cmd.pipefd[0], buff, 1) != 0)
+ *                write(1, buff, 1);
+ *        close(cmd.pipefd[0]);
+ *        return (0);
+ *}
+ */
 /*
  *int dispf(void *data)
  *{

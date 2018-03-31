@@ -15,7 +15,7 @@ int add_var(char **args)
 
 	while (environ[i] != NULL)
 		i++;
-	environ[i] = concat_args(args);
+	environ[i] = array_to_str(args, "=");
 	if (environ[i] == NULL)
 		return (-1);
 	environ[i + 1] = NULL;
