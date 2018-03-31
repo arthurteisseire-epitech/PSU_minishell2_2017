@@ -17,22 +17,18 @@ MY	=	my
 TREE	=	tree
 LIBS	=	-L$(DMY) -l$(MY) -L$(DTREE) -l$(TREE)
 
-DENV	=	$(DSRC)env/
 DBUILTS	=	$(DSRC)builtins/
 DMYSH	=	$(DSRC)mysh/
-DERROR	=	$(DSRC)error/
 DEXEC	=	$(DSRC)exec/
 
 SRC     =	$(DSRC)main.c			\
 		$(DEXEC)get_token.c		\
 		$(DEXEC)execout_to_pipe.c	\
+		$(DEXEC)exec_cmd.c		\
 		$(DMYSH)mysh.c			\
 		$(DMYSH)run.c			\
-		$(DMYSH)exec_cmd.c		\
-		$(DERROR)my_perror.c		\
-		$(DENV)env.c			\
-		$(DENV)add_var.c		\
-		$(DENV)remove_var.c		\
+		$(DMYSH)my_perror.c		\
+		$(DBUILTS)env.c			\
 		$(DBUILTS)cd.c			\
 		$(DBUILTS)exec_builtins.c
 CFLAGS	+=	-Wall -W -Wextra -I$(INC) -g

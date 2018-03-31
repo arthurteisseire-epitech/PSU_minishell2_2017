@@ -5,11 +5,11 @@
 ** by Arthur Teisseire
 */
 
+#include <errno.h>
+#include <string.h>
 #include "my.h"
 #include "mysh.h"
-#include "env.h"
 #include "builtins.h"
-#include "my_perror.h"
 
 static char *concat_with_slash(char *dest, char *src, int len_src)
 {

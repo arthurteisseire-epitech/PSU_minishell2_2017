@@ -25,7 +25,6 @@ int main(int ac, char **av)
 		my_puterror("\nAn error occured\n");
 		return (84);
 	}
-	printf("RETURN VALUE: %d\n", sh.rvalue);
 	return (sh.rvalue);
 }
 

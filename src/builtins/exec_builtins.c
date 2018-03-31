@@ -8,7 +8,6 @@
 #include "my.h"
 #include "mysh.h"
 #include "builtins.h"
-#include "env.h"
 
 static const builtins_t builtins[NB_BUILTINS] = {
 	{"cd", cd},

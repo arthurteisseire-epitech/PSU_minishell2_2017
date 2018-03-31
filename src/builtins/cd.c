@@ -7,8 +7,6 @@
 
 #include "my.h"
 #include "mysh.h"
-#include "env.h"
-#include "my_perror.h"
 
 static int is_null(char **args)
 {

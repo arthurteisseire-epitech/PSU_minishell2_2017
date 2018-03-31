@@ -7,7 +7,7 @@
 
 #include "mysh.h"
 #include "my.h"
-#include "env.h"
+#include "builtins.h"
 
 int my_env(char **args)
 {
@@ -42,11 +42,26 @@ int my_setenv(char **args)
 
 int my_unsetenv(char **args)
 {
+	int index;
+
 	if (my_arrlen((void *)args) == 1) {
 		my_puterror("unsetenv: Too few arguments.\n");
 		return (-1);
 	}
-	if (remove_var(&args[1]) == -1)
+	index = index_name(args[1], environ);
+	rm_arrelem((void *)environ, index, NULL);
+	return (0);
+}
+
+int add_var(char **args)
+{
+	int i = 0;
+
+	while (environ[i] != NULL)
+		i++;
+	environ[i] = array_to_str(args, "=");
+	if (environ[i] == NULL)
 		return (-1);
+	environ[i + 1] = NULL;
 	return (0);
 }
