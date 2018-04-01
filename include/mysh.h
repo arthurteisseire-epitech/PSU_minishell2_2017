@@ -19,6 +19,8 @@
 #define SEGFAULT 11
 #define DIVZERO 8
 
+typedef struct btree btree_t;
+
 typedef struct cmd {
 	int pipefd[2];
 	int (*exec)(char **left, char **right);
@@ -35,9 +37,9 @@ typedef struct sh {
 extern char **environ;
 
 int execout_to_pipe(cmd_t *cmd, char **array);
-int redir2_right(cmd_t *cmd);
-int redir1_right(cmd_t *cmd);
-int redir1_left(cmd_t *cmd);
+int redir2_right(btree_t *root);
+int redir1_right(btree_t *root);
+int redir1_left(btree_t *root);
 int exec_cmd(char **cmd);
 int run(sh_t *sh);
 int mysh(sh_t *sh);
