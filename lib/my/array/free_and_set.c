@@ -5,12 +5,10 @@
 ** by Arthur Teisseire
 */
 
-#include <stdlib.h>
-
-void free_and_set(void **ptr, void *new_ptr)
+void free_and_set(void **ptr, void *new_ptr, void (*free_func)(void *))
 {
 	void *to_free = *ptr;
 
 	*ptr = new_ptr;
-	free(to_free);
+	free_func(to_free);
 }

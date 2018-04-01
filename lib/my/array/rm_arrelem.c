@@ -5,7 +5,7 @@
 ** by Arthur Teisseire
 */
 
-void rm_arrelem(void **array, int index, void (*free_fun)(void *ptr))
+void rm_arrelem(void **array, int index, void (*free_func)(void *ptr))
 {
 	void *to_free = array[index];
 
@@ -13,6 +13,6 @@ void rm_arrelem(void **array, int index, void (*free_fun)(void *ptr))
 		array[index] = array[index + 1];
 		index++;
 	}
-	if (free_fun)
-		free_fun(to_free);
+	if (free_func)
+		free_func(to_free);
 }

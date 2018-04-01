@@ -22,9 +22,9 @@ char*	array_to_str(char **array, char *between);
 void	free_array(char **array);
 int     my_arrlen(void **data);
 void	my_arrcpy(void **dest, void const **array);
-void	rm_arrelem(void **array, int index, void (*free_fun)(void *ptr));
+void	rm_arrelem(void **array, int index, void (*free_func)(void *ptr));
 int	apply_on_array(void **array, int (*applyf)());
-void	free_and_set(void **ptr, void *new_ptr);
+void	free_and_set(void **ptr, void *new_ptr, void (*free_func)(void *));
 void*	my_memcpy(void *dest, void *src, int size);
 void*	my_memset(void *s, char b, int n);
 
