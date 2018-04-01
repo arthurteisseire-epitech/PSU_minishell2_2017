@@ -46,6 +46,7 @@ SRC	=	$(DPUT)my_put_nbr.c		\
 		$(DSTRING)len_to_flags.c	\
 		$(DSTRING)count_words.c		\
 		$(DARRAY)my_memcpy.c		\
+		$(DARRAY)my_memset.c		\
 		$(DARRAY)my_arrlen.c		\
 		$(DARRAY)my_arrdup.c		\
 		$(DARRAY)apply_on_array.c	\

@@ -26,6 +26,7 @@ void	rm_arrelem(void **array, int index, void (*free_fun)(void *ptr));
 int	apply_on_array(void **array, int (*applyf)());
 void	free_and_set(void **ptr, void *new_ptr);
 void*	my_memcpy(void *dest, void *src, int size);
+void*	my_memset(void *s, char b, int n);
 
 int	write_in_file(char *pathname, int fd_in, int flag_open);
 void	my_fdcpy(int fd_dest, int fd_src);
