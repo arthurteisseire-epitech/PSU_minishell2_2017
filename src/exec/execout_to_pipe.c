@@ -9,7 +9,7 @@
 #include "mysh.h"
 #include "my.h"
 
-int execout_to_pipe(cmd_t *cmd, char **str)
+int execout_to_pipe(cmd_t *cmd, char **array)
 {
 	int child_pid;
 	int oldread = cmd->pipefd[0];
@@ -21,7 +21,7 @@ int execout_to_pipe(cmd_t *cmd, char **str)
 	if (child_pid == 0) {
 		dup2(oldread, 0);
 		dup2(cmd->pipefd[1], 1);
-		exec_cmd(str);
+		exec_cmd(array);
 		my_puterror("Command not found.\n");
 		return (1);
 	} else {

@@ -15,7 +15,7 @@
 #include <stdio.h>
 #include <dirent.h>
 
-#define NB_TOKENS 2
+#define NB_SEP 5
 #define SEGFAULT 11
 #define DIVZERO 8
 
@@ -34,7 +34,10 @@ typedef struct sh {
 
 extern char **environ;
 
-int execout_to_pipe(cmd_t *cmd, char **str);
+int execout_to_pipe(cmd_t *cmd, char **array);
+int redir2_right(cmd_t *cmd);
+int redir1_right(cmd_t *cmd);
+int redir1_left(cmd_t *cmd);
 int exec_cmd(char **cmd);
 int run(sh_t *sh);
 int mysh(sh_t *sh);

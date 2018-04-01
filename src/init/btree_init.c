@@ -11,18 +11,18 @@
 #include "init.h"
 #include "dict.h"
 
-static const dicf_t sep[NB_TOKENS] = {
+static const dicf_t sep[NB_SEP] = {
 	{";", exec_cmd},
-	{"|", execout_to_pipe}
-	/*{"<", exec_redir_left},*/
+	{"|", execout_to_pipe},
+	{">>", redir2_right},
+	{">", redir1_right},
+	{"<", redir1_left}
 	/*{"<<", exec_redir2_left},*/
-	/*{">", exec_redir_right},*/
-	/*{">>", exec_redir2_right}*/
 };
 
 static int get_index(char *str)
 {
-	for (int i = 0; i < NB_TOKENS; i++)
+	for (int i = 0; i < NB_SEP; i++)
 		if (my_strstr(str, sep[i].str) != NULL)
 			return (i);
 	return (-1);
