@@ -8,18 +8,21 @@
 CC	=	gcc
 INC	=	btree.h
 DTESTS	=	tests/
+DSRC	=	./
+DINC	=	./
 
-SRC	=	btree_apply_infix.c \
-		btree_apply_prefix.c \
-		btree_apply_suffix.c \
-		btree_apply_nodes.c \
-		btree_create_node.c \
-		btree_insert_data.c \
-		btree_search_item.c \
-		btree_level_count.c \
-		btree_node_count.c
+SRC	=	$(DSRC)btree_apply_infix.c	\
+		$(DSRC)btree_apply_prefix.c	\
+		$(DSRC)btree_apply_suffix.c	\
+		$(DSRC)btree_apply_nodes.c	\
+		$(DSRC)btree_apply_create.c	\
+		$(DSRC)btree_create_node.c	\
+		$(DSRC)btree_insert_data.c	\
+		$(DSRC)btree_search_item.c	\
+		$(DSRC)btree_level_count.c	\
+		$(DSRC)btree_node_count.c
 
-CFLAGS	+=	-Wall -W -Wextra
+CFLAGS	+=	-Wall -W -Wextra -I$(DINC)
 OBJ	=	$(SRC:.c=.o)
 NAME	=	libtree.a
 

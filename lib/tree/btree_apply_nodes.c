@@ -7,7 +7,7 @@
 
 #include "btree.h"
 
-void btree_apply_nodes(btree_t *root, int (*applyf)(void *))
+void btree_apply_nodes(btree_t *root, int (*applyf)(btree_t *))
 {
 	if (root->left != NULL)
 		btree_apply_nodes(root->left, applyf);
