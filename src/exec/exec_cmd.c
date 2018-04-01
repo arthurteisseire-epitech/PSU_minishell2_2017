@@ -11,30 +11,6 @@
 #include "mysh.h"
 #include "builtins.h"
 
-static char *concat_with_slash(char *dest, char *src, int len_src)
-{
-	int len_dest = my_strlen(dest);
-	char *res = malloc(sizeof(char) * (len_dest + len_src + 2));
-	int i = 0;
-	int j = 0;
-
-	if (res == NULL)
-		return (NULL);
-	while (dest[i] != '\0') {
-		res[i] = dest[i];
-		i++;
-	}
-	res[i] = '/';
-	i++;
-	while (j < len_src) {
-		res[i] = src[j];
-		j++;
-		i++;
-	}
-	res[i] = '\0';
-	return (res);
-}
-
 static int exec_with_path(char **args)
 {
 	char *path = get_env_value("PATH", environ);
@@ -47,7 +23,8 @@ static int exec_with_path(char **args)
 		return (-1);
 	paths = split(path, ":");
 	while (paths[i] != NULL) {
-		cmd = concat_with_slash(paths[i], args[0], len_prog);
+		cmd = concat(my_strdup(paths[i]), "/", 1);
+		cmd = concat(cmd, args[0], len_prog);
 		if (access(cmd, F_OK) != -1)
 			execve(cmd, args, environ);
 		free(cmd);
@@ -72,16 +49,13 @@ static int wrong_arch(char *arg)
 
 static int right_ok(char *pathname)
 {
-	DIR *dir;
+	DIR *dir = opendir(pathname);
 
-	if (access(pathname, X_OK) == -1) {
+	if (access(pathname, X_OK) == -1 || dir != NULL) {
 		my_putstr(pathname);
 		my_putstr(": Permission denied.\n");
-		return (0);
-	} else if ((dir = opendir(pathname)) != NULL) {
-		my_putstr(pathname);
-		my_putstr(": Permission denied.\n");
-		closedir(dir);
+		if (dir)
+			closedir(dir);
 		return (0);
 	}
 	return (1);

@@ -10,7 +10,7 @@
 #include "mysh.h"
 #include "init.h"
 
-int main_old(int ac, char **av)
+int main(int ac, char **av)
 {
 	sh_t sh;
 	int status;
@@ -40,7 +40,7 @@ int print_node(void *data)
 	return (0);
 }
 
-int main(int ac, char **av)
+int main_old(int ac, char **av)
 {
 	btree_t *root;
 
