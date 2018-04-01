@@ -16,12 +16,15 @@ void bufferize(char *str)
 
 	if (!str) {
 		my_putstr(buffer);
+		index = 0;
+		buffer[0] = '\0';
 		return;
 	}
 	len = my_strlen(str);
 	if (index + len > 4096) {
 		my_putstr(buffer);
 		index = 0;
+		buffer[0] = '\0';
 	}
 	index += my_strcpy(&tmp[index], str);
 }
