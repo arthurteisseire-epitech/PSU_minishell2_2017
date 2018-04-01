@@ -8,8 +8,9 @@
 #include "btree.h"
 #include "my.h"
 #include "mysh.h"
+#include "init.h"
 
-int main(int ac, char **av)
+int main_old(int ac, char **av)
 {
 	sh_t sh;
 	int status;
@@ -26,6 +27,31 @@ int main(int ac, char **av)
 		return (84);
 	}
 	return (sh.rvalue);
+}
+
+int print_node(void *data)
+{
+	cmd_t *this = data;
+
+	if (this->str) {
+		bufferize(this->str);
+		bufferize("\n");
+	}
+	return (0);
+}
+
+int main(int ac, char **av)
+{
+	btree_t *root;
+
+	if (ac != 2)
+		return (84);
+	init_tree(&root, av[1]);
+	if (root == NULL)
+		return (84);
+	btree_apply_prefix(root, print_node);
+	bufferize(NULL);
+	return (0);
 }
 
 /*
@@ -49,12 +75,6 @@ int main(int ac, char **av)
  *}
  */
 /*
- *int dispf(void *data)
- *{
- *        my_putstr(data);
- *        my_putchar('\n');
- *        return (0);
- *}
  *
  *int main(void)
  *{

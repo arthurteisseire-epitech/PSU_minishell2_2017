@@ -20,9 +20,11 @@ LIBS	=	-L$(DMY) -l$(MY) -L$(DTREE) -l$(TREE)
 DBUILTS	=	$(DSRC)builtins/
 DMYSH	=	$(DSRC)mysh/
 DEXEC	=	$(DSRC)exec/
+DINIT	=	$(DSRC)init/
 
 SRC     =	$(DSRC)main.c			\
-		$(DEXEC)get_token.c		\
+		$(DINIT)new_cmd.c		\
+		$(DINIT)btree_init.c		\
 		$(DEXEC)execout_to_pipe.c	\
 		$(DEXEC)exec_cmd.c		\
 		$(DMYSH)mysh.c			\
