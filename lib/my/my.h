@@ -63,5 +63,6 @@ char*	get_next_to(char const *str, char const *flags);
 char*	get_before_to(char const *str, char const *flags);
 void	bufferize(char *str);
 char*	my_strstr(char const *haystack, char const *needle);
+int	count_to_word(char const *str, char const *word);
 
 #endif

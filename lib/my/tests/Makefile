@@ -71,6 +71,7 @@ SRC_UT	=	$(DSRC_UT)redirect.c		\
 		$(DSRC_UT)tests_split.c		\
 		$(DSRC_UT)tests_get_next_line.c	\
 		$(DSRC_UT)tests_get_next_to.c	\
+		$(DSRC_UT)tests_get_before_to.c	\
 		$(DSRC_UT)tests_my_strstr.c	\
 		$(DSRC_UT)tests_array_to_str.c	\
 		$(DSRC_UT)tests_cmp.c
