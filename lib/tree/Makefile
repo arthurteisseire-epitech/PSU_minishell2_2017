@@ -15,8 +15,9 @@ SRC	=	$(DSRC)btree_apply_infix.c	\
 		$(DSRC)btree_apply_prefix.c	\
 		$(DSRC)btree_apply_suffix.c	\
 		$(DSRC)btree_apply_nodes.c	\
-		$(DSRC)btree_apply_last.c	\
+		$(DSRC)btree_apply_create.c	\
 		$(DSRC)btree_create_node.c	\
+		$(DSRC)btree_free.c		\
 		$(DSRC)btree_insert_data.c	\
 		$(DSRC)btree_search_item.c	\
 		$(DSRC)btree_level_count.c	\
