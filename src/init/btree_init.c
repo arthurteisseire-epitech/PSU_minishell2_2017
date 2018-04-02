@@ -50,16 +50,18 @@ int fill_tree(btree_t *root)
 
 	if (i != -1) {
 		new = new_cmd(get_before_to(this->str, sep[i].str));
+		my_strip(&new->str, " \t");
 		root->left = btree_create_node(new);
 		if (new == NULL || root->left == NULL)
 			return (-1);
 		new = new_cmd(get_next_to(this->str, sep[i].str));
+		my_strip(&new->str, " \t");
 		root->right = btree_create_node(new);
 		if (new == NULL || root->right == NULL)
 			return (-1);
 		this->exec = sep[i].f;
 		free_and_set((void **)&this->str, NULL, free);
-		return (1);
+		return (0);
 	}
-	return (0);
+	return (1);
 }

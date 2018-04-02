@@ -10,7 +10,7 @@
 #include "mysh.h"
 #include "init.h"
 
-int main(int ac, char **av)
+int main_old(int ac, char **av)
 {
 	sh_t sh;
 	int status;
@@ -29,7 +29,7 @@ int main(int ac, char **av)
 	return (sh.rvalue);
 }
 
-int print_node(void *data)
+int print_nodee(void *data)
 {
 	cmd_t *this = data;
 
@@ -40,7 +40,16 @@ int print_node(void *data)
 	return (0);
 }
 
-int main_old(int ac, char **av)
+int print_node(btree_t *root)
+{
+	cmd_t *this = root->item;
+
+	bufferize(this->str);
+	bufferize("\n");
+	return (0);
+}
+
+int main(int ac, char **av)
 {
 	btree_t *root;
 
@@ -49,7 +58,7 @@ int main_old(int ac, char **av)
 	init_tree(&root, av[1]);
 	if (root == NULL)
 		return (84);
-	btree_apply_prefix(root, print_node);
+	btree_apply_last(root, print_node);
 	bufferize(NULL);
 	return (0);
 }
