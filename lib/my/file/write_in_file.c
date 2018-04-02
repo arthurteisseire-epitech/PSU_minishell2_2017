@@ -11,7 +11,7 @@
 
 int write_in_file(char *pathname, int fd_in, int flag_open)
 {
-	int fd = open(pathname, O_WRONLY);
+	int fd = open(pathname, O_WRONLY | flag_open);
 
 	if (fd == -1)
 		fd = open(pathname, O_CREAT | O_WRONLY | flag_open,

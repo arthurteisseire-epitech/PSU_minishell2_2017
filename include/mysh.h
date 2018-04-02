@@ -23,7 +23,7 @@ typedef struct btree btree_t;
 
 typedef struct cmd {
 	int pipefd[2];
-	int (*exec)(char **left, char **right);
+	int (*exec)(btree_t *root);
 	char *str;
 	char **array;
 	char *sep;
@@ -40,6 +40,7 @@ int execout_to_pipe(cmd_t *cmd, char **array);
 int redir2_right(btree_t *root);
 int redir1_right(btree_t *root);
 int redir1_left(btree_t *root);
+int btree_exec(btree_t *root);
 int exec_cmd(char **cmd);
 int run(sh_t *sh);
 int mysh(sh_t *sh);

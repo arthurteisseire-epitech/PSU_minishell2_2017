@@ -13,10 +13,10 @@
 
 static const dicf_t sep[NB_SEP] = {
 	{";", exec_cmd},
-	{"|", execout_to_pipe},
 	{">>", redir2_right},
 	{">", redir1_right},
-	{"<", redir1_left}
+	{"<", redir1_left},
+	{"|", execout_to_pipe}
 	/*{"<<", exec_redir2_left},*/
 };
 

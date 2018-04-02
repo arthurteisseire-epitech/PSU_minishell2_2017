@@ -21,6 +21,7 @@ int redir1_right(btree_t *root)
 		return (-1);
 	execout_to_pipe(cmd, array);
 	write_in_file(cmd_right->str, cmd->pipefd[0], O_TRUNC);
+	free_array(array);
 	return (0);
 }
 
@@ -35,6 +36,7 @@ int redir2_right(btree_t *root)
 		return (-1);
 	execout_to_pipe(cmd, array);
 	write_in_file(cmd_right->str, cmd->pipefd[0], O_APPEND);
+	free_array(array);
 	return (0);
 }
 

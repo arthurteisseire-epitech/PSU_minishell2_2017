@@ -27,6 +27,7 @@ SRC     =	$(DSRC)main.c			\
 		$(DINIT)btree_init.c		\
 		$(DEXEC)execout_to_pipe.c	\
 		$(DEXEC)exec_cmd.c		\
+		$(DEXEC)btree_exec.c		\
 		$(DEXEC)redir.c			\
 		$(DMYSH)mysh.c			\
 		$(DMYSH)run.c			\

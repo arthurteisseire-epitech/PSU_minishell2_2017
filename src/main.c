@@ -29,17 +29,6 @@ int main_old(int ac, char **av)
 	return (sh.rvalue);
 }
 
-int print_nodee(void *data)
-{
-	cmd_t *this = data;
-
-	if (this->str) {
-		bufferize(this->str);
-		bufferize("\n");
-	}
-	return (0);
-}
-
 int print_node(btree_t *root)
 {
 	cmd_t *this = root->item;
@@ -58,7 +47,7 @@ int main(int ac, char **av)
 	init_tree(&root, av[1]);
 	if (root == NULL)
 		return (84);
-	btree_apply_last(root, print_node);
+	btree_exec(root);
 	bufferize(NULL);
 	return (0);
 }
