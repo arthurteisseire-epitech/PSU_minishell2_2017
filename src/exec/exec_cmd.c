@@ -8,6 +8,7 @@
 #include <errno.h>
 #include <string.h>
 #include "my.h"
+#include "btree.h"
 #include "mysh.h"
 #include "builtins.h"
 
@@ -61,8 +62,10 @@ static int right_ok(char *pathname)
 	return (1);
 }
 
-int exec_cmd(char **cmd)
+int exec_cmd(btree_t *root)
 {
+	cmd_t *this = root->item;
+	char **cmd = this->array;
 	int status = -1;
 
 	if (cmd && cmd[0] && access(cmd[0], F_OK) != -1) {

@@ -8,9 +8,26 @@
 #include <unistd.h>
 #include "mysh.h"
 #include "my.h"
+#include "btree.h"
 
-int execout_to_pipe(cmd_t *cmd, char **array)
+int exec_pipe(btree_t *root)
 {
+	cmd_t *this = root->item;
+	cmd_t *cmd_left = root->left->item;
+	cmd_t *cmd_right = root->right->item;
+
+	execout_to_pipe(root->left);
+	if (cmd_right->str != NULL) {
+		cmd_right->pipefd[0] = cmd_left->pipefd[0];
+		execout_to_pipe(root->right);
+	}
+	this->pipefd[0] = cmd_right->pipefd[0];
+	return (0);
+}
+
+int execout_to_pipe(btree_t *root)
+{
+	cmd_t *cmd = root->item;
 	int child_pid;
 	int oldread = cmd->pipefd[0];
 
@@ -21,7 +38,7 @@ int execout_to_pipe(cmd_t *cmd, char **array)
 	if (child_pid == 0) {
 		dup2(oldread, 0);
 		dup2(cmd->pipefd[1], 1);
-		exec_cmd(array);
+		exec_cmd(root);
 		my_puterror("Command not found.\n");
 		return (1);
 	} else {

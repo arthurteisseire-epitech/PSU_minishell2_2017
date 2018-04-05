@@ -15,6 +15,7 @@ static void handle_status(sh_t *sh, int wstatus)
 {
 	if (WIFEXITED(wstatus))
 		sh->rvalue = WEXITSTATUS(wstatus);
+#ifdef WCOREDUMP
 	if (WCOREDUMP(wstatus) && WTERMSIG(wstatus) == SEGFAULT)
 		my_putstr("Segmentation fault\n");
 	else if (!WCOREDUMP(wstatus) && WTERMSIG(wstatus) == SEGFAULT)
@@ -23,6 +24,7 @@ static void handle_status(sh_t *sh, int wstatus)
 		my_putstr("Floating exception\n");
 	else if (!WCOREDUMP(wstatus) && WTERMSIG(wstatus) == DIVZERO)
 		my_putstr("Floating exception\n");
+#endif
 }
 
 static int fork_and_exec(sh_t *sh)

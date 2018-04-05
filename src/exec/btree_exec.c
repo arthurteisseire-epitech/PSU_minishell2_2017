@@ -14,14 +14,15 @@ int btree_exec(btree_t *root)
 	cmd_t *this = root->item;
 	int status = 0;
 
-	if (root->right != NULL)
-		btree_exec(root->right);
 	if (root->left != NULL)
-		btree_exec(root->left);
-	if (root->left == NULL && root->right == NULL)
-		return (0);
-	if (root->left->left == NULL && root->left->right == NULL
-	&& root->right->left == NULL && root->right->right == NULL)
+		status = btree_exec(root->left);
+	if (root->right != NULL)
+		status = btree_exec(root->right);
+	if (status == 7) {
 		status = this->exec(root);
+		status = 0;
+	}
+	if (root->left == NULL && root->right == NULL)
+		return (7);
 	return (status);
 }
