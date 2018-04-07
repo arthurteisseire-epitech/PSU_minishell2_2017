@@ -13,6 +13,8 @@ int semi_colons(btree_t *root)
 {
 	cmd_t *left = root->left->item;
 
+	left->array = split(left->str, " \t");
+	execout_to_pipe(left);
 	my_fdcpy(1, left->pipefd[0]);
 	return (0);
 }

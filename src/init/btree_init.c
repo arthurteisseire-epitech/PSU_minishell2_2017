@@ -68,3 +68,14 @@ int fill_tree(btree_t *root)
 	}
 	return (1);
 }
+
+cmd_t *new_cmd(char *str)
+{
+	cmd_t *cmd = malloc(sizeof(cmd_t));
+	if (cmd == NULL)
+		return (NULL);
+	cmd->str = str;
+	cmd->array = NULL;
+	cmd->exec = NULL;
+	return (cmd);
+}

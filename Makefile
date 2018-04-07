@@ -23,7 +23,6 @@ DEXEC	=	$(DSRC)exec/
 DINIT	=	$(DSRC)init/
 
 SRC     =	$(DSRC)main.c			\
-		$(DINIT)new_cmd.c		\
 		$(DINIT)btree_init.c		\
 		$(DEXEC)execout_to_pipe.c	\
 		$(DEXEC)exec_cmd.c		\

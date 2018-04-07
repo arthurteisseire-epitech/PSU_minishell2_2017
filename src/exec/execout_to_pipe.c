@@ -16,10 +16,12 @@ int exec_pipe(btree_t *root)
 	cmd_t *cmd_left = root->left->item;
 	cmd_t *cmd_right = root->right->item;
 
+	cmd_left->array = split(cmd_left->str, " \t");
 	cmd_left->pipefd[0] = this->pipefd[0];
 	execout_to_pipe(root->left->item);
 	cmd_right->pipefd[0] = cmd_left->pipefd[0];
 	if (cmd_right->str != NULL) {
+		cmd_right->array = split(cmd_right->str, " \t");
 		execout_to_pipe(root->right->item);
 	}
 	this->pipefd[0] = cmd_right->pipefd[0];
