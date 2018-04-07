@@ -12,17 +12,25 @@
 int btree_exec(btree_t *root)
 {
 	cmd_t *this = root->item;
-	int status = 0;
+	cmd_t *cmd_right;
+	cmd_t *cmd_left;
 
-	if (root->left != NULL)
-		status = btree_exec(root->left);
-	if (root->right != NULL)
-		status = btree_exec(root->right);
-	if (status == 7) {
-		status = this->exec(root);
-		status = 0;
+	if (root->left != NULL) {
+		cmd_left = root->left->item;
+		if (cmd_left->exec != NULL) {
+			cmd_left->pipefd[0] = this->pipefd[0];
+			this->pipefd[0] = btree_exec(root->left);
+		}
 	}
-	if (root->left == NULL && root->right == NULL)
-		return (7);
-	return (status);
+	this = root->item;
+	if (this->exec != NULL)
+		this->exec(root);
+	if (root->right != NULL) {
+		cmd_right = root->right->item;
+		if (cmd_right->exec != NULL) {
+			cmd_right->pipefd[0] = this->pipefd[0];
+			this->pipefd[0] = btree_exec(root->right);
+		}
+	}
+	return (this->pipefd[0]);
 }

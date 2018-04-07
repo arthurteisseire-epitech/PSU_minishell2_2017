@@ -36,12 +36,15 @@ typedef struct sh {
 
 extern char **environ;
 
-int execout_to_pipe(btree_t *root);
+int semi_colons(btree_t *root);
+int exec_pipe(btree_t *root);
+int execout_to_pipe(cmd_t *cmd);
 int redir2_right(btree_t *root);
 int redir1_right(btree_t *root);
 int redir1_left(btree_t *root);
 int btree_exec(btree_t *root);
-int exec_cmd(btree_t *root);
+int exec_cmd(char **cmd);
+int fork_and_exec(char **array);
 int run(sh_t *sh);
 int mysh(sh_t *sh);
 int call_exit(char *cmd);

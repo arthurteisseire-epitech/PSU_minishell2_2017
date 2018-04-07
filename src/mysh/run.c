@@ -11,10 +11,10 @@
 #include "mysh.h"
 #include "builtins.h"
 
-static void handle_status(sh_t *sh, int wstatus)
+static int handle_status(int wstatus)
 {
 	if (WIFEXITED(wstatus))
-		sh->rvalue = WEXITSTATUS(wstatus);
+		return (WEXITSTATUS(wstatus));
 #ifdef WCOREDUMP
 	if (WCOREDUMP(wstatus) && WTERMSIG(wstatus) == SEGFAULT)
 		my_putstr("Segmentation fault\n");
@@ -25,20 +25,21 @@ static void handle_status(sh_t *sh, int wstatus)
 	else if (!WCOREDUMP(wstatus) && WTERMSIG(wstatus) == DIVZERO)
 		my_putstr("Floating exception\n");
 #endif
+	return (0);
 }
 
-static int fork_and_exec(sh_t *sh)
+int fork_and_exec(char **array)
 {
 	pid_t child_pid;
 	int wstatus;
 
-	if (!exec_builtins(sh)) {
+	if (!exec_builtins(array)) {
 		child_pid = fork();
 		if (child_pid == 0) {
-			return (exec_cmd(sh->cmd));
+			return (exec_cmd(array));
 		} else if (child_pid > 0) {
 			wait(&wstatus);
-			handle_status(sh, wstatus);
+			return (handle_status(wstatus));
 		} else
 			return (-1);
 	}
@@ -57,7 +58,7 @@ int run(sh_t *sh)
 			return (sh->rvalue);
 		sh->cmd = split(line, " \t");
 		free(line);
-		status = fork_and_exec(sh);
+		status = fork_and_exec(sh->cmd);
 		free_array(sh->cmd);
 		if (status != 2) {
 			sh->rvalue = status;

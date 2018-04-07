@@ -16,18 +16,18 @@ int exec_pipe(btree_t *root)
 	cmd_t *cmd_left = root->left->item;
 	cmd_t *cmd_right = root->right->item;
 
-	execout_to_pipe(root->left);
+	cmd_left->pipefd[0] = this->pipefd[0];
+	execout_to_pipe(root->left->item);
+	cmd_right->pipefd[0] = cmd_left->pipefd[0];
 	if (cmd_right->str != NULL) {
-		cmd_right->pipefd[0] = cmd_left->pipefd[0];
-		execout_to_pipe(root->right);
+		execout_to_pipe(root->right->item);
 	}
 	this->pipefd[0] = cmd_right->pipefd[0];
 	return (0);
 }
 
-int execout_to_pipe(btree_t *root)
+int execout_to_pipe(cmd_t *cmd)
 {
-	cmd_t *cmd = root->item;
 	int child_pid;
 	int oldread = cmd->pipefd[0];
 
@@ -38,7 +38,7 @@ int execout_to_pipe(btree_t *root)
 	if (child_pid == 0) {
 		dup2(oldread, 0);
 		dup2(cmd->pipefd[1], 1);
-		exec_cmd(root);
+		exec_cmd(cmd->array);
 		my_puterror("Command not found.\n");
 		return (1);
 	} else {

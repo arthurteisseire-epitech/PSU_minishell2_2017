@@ -12,11 +12,11 @@
 #include "dict.h"
 
 static const dicf_t sep[NB_SEP] = {
-	{";", exec_cmd},
+	{";", semi_colons},
 	{">>", redir2_right},
 	{">", redir1_right},
 	{"<", redir1_left},
-	{"|", execout_to_pipe}
+	{"|", exec_pipe}
 	/*{"<<", exec_redir2_left},*/
 };
 
@@ -30,6 +30,7 @@ static int get_index(char *str)
 
 int init_tree(btree_t **root, char *str)
 {
+	cmd_t *this;
 	cmd_t *cmd = new_cmd(my_strdup(str));
 
 	if (cmd == NULL)
@@ -37,6 +38,8 @@ int init_tree(btree_t **root, char *str)
 	*root = btree_create_node(cmd);
 	if (root == NULL)
 		return (-1);
+	this = (*root)->item;
+	this->pipefd[0] = 0;
 	if (btree_apply_last(*root, fill_tree) == -1)
 		return (-1);
 	return (0);
