@@ -12,7 +12,8 @@ typedef struct btree btree_t;
 typedef struct cmd cmd_t;
 
 cmd_t *new_cmd(char *str);
-int init_tree(btree_t **root, char *str);
-int fill_tree(btree_t *root);
+int btree_init(btree_t **root, char *str);
+int btree_fill(btree_t *root);
+btree_t *btree_new_node(cmd_t *cmd, int index, char *(get)());
 
 #endif

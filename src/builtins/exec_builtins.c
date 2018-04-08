@@ -16,8 +16,9 @@ static const builtins_t builtins[NB_BUILTINS] = {
 	{"setenv", my_setenv}
 };
 
-int exec_builtins(char **array)
+int exec_builtins(char *cmd)
 {
+	char **array = split(cmd, " \t");
 	for (int i = 0; i < NB_BUILTINS; i++)
 		if (my_strcmp(builtins[i].name, array[0]) == 0) {
 			builtins[i].f(array);

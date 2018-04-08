@@ -28,15 +28,15 @@ static int handle_status(int wstatus)
 	return (0);
 }
 
-int fork_and_exec(char **array)
+int fork_and_exec(char *cmd)
 {
 	pid_t child_pid;
 	int wstatus;
 
-	if (!exec_builtins(array)) {
+	if (!exec_builtins(cmd)) {
 		child_pid = fork();
 		if (child_pid == 0) {
-			return (exec_cmd(array));
+			return (exec_cmd(cmd));
 		} else if (child_pid > 0) {
 			wait(&wstatus);
 			return (handle_status(wstatus));
@@ -58,7 +58,7 @@ int run(sh_t *sh)
 			return (sh->rvalue);
 		sh->cmd = split(line, " \t");
 		free(line);
-		status = fork_and_exec(sh->cmd);
+		status = fork_and_exec(line);
 		free_array(sh->cmd);
 		if (status != 2) {
 			sh->rvalue = status;

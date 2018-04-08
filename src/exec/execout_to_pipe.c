@@ -40,7 +40,7 @@ int execout_to_pipe(cmd_t *cmd)
 	if (child_pid == 0) {
 		dup2(oldread, 0);
 		dup2(cmd->pipefd[1], 1);
-		exec_cmd(cmd->array);
+		exec_cmd(cmd->str);
 		my_puterror("Command not found.\n");
 		return (1);
 	} else {

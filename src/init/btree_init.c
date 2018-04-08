@@ -28,7 +28,7 @@ static int get_index(char *str)
 	return (-1);
 }
 
-int init_tree(btree_t **root, char *str)
+int btree_init(btree_t **root, char *str)
 {
 	cmd_t *this;
 	cmd_t *cmd = new_cmd(my_strdup(str));
@@ -40,33 +40,42 @@ int init_tree(btree_t **root, char *str)
 		return (-1);
 	this = (*root)->item;
 	this->pipefd[0] = 0;
-	if (btree_apply_last(*root, fill_tree) == -1)
+	if (btree_apply_last(*root, btree_fill) == -1)
 		return (-1);
 	return (0);
 }
 
-int fill_tree(btree_t *root)
+int btree_fill(btree_t *root)
 {
 	cmd_t *this = root->item;
-	cmd_t *new;
 	int i = get_index(this->str);
 
 	if (i != -1) {
-		new = new_cmd(get_before_to(this->str, sep[i].str));
-		my_strip(&new->str, " \t");
-		root->left = btree_create_node(new);
-		if (new == NULL || root->left == NULL)
+		root->left = btree_new_node(this, i, get_before_to);
+		if (root->left == NULL)
 			return (-1);
-		new = new_cmd(get_next_to(this->str, sep[i].str));
-		my_strip(&new->str, " \t");
-		root->right = btree_create_node(new);
-		if (new == NULL || root->right == NULL)
+		root->right = btree_new_node(this, i, get_next_to);
+		if (root->right == NULL)
 			return (-1);
 		this->exec = sep[i].f;
 		free_and_set((void **)&this->str, NULL, free);
 		return (0);
 	}
 	return (1);
+}
+
+btree_t *btree_new_node(cmd_t *cmd, int index, char *(get)())
+{
+	cmd_t *new = new_cmd(get(cmd->str, sep[index].str));
+
+	my_strip(&new->str, " \t");
+	if (new == NULL)
+		return (NULL);
+	if (new->str != NULL && my_strcmp(new->str, "") == 0) {
+		//free_and_set((void **)&new->str, NULL, free);
+		//new->str = NULL;
+	}
+	return (btree_create_node(new));
 }
 
 cmd_t *new_cmd(char *str)

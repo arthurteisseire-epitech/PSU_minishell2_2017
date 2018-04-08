@@ -41,13 +41,18 @@ int print_node(btree_t *root)
 int main(int ac, char **av)
 {
 	btree_t *root;
+	cmd_t *this;
 
 	if (ac != 2)
 		return (84);
-	init_tree(&root, av[1]);
+	btree_init(&root, av[1]);
 	if (root == NULL)
 		return (84);
-	btree_exec(root);
+	this = root->item;
+	if (this->str != NULL)
+		exec_cmd(this->str);
+	else
+		btree_exec(root);
 	bufferize(NULL);
 	return (0);
 }

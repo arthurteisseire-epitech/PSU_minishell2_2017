@@ -19,7 +19,7 @@ typedef struct builtins {
 	int (*f)(char **args);
 } builtins_t;
 
-int exec_builtins(char **array);
+int exec_builtins(char *cmd);
 int cd(char **args);
 int my_setenv(char **args);
 int my_unsetenv(char **args);

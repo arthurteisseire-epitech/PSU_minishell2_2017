@@ -9,12 +9,24 @@
 #include "my.h"
 #include "btree.h"
 
+static void write_output(cmd_t *cmd)
+{
+	if (cmd->str != NULL && my_strcmp(cmd->str, "") != 0) {
+		cmd->array = split(cmd->str, " \t");
+		execout_to_pipe(cmd);
+	}
+	if (cmd->pipefd[0] != 0) 
+		my_fdcpy(1, cmd->pipefd[0]);
+}
+
 int semi_colons(btree_t *root)
 {
-	cmd_t *left = root->left->item;
+	cmd_t *this = root->item;
 
-	left->array = split(left->str, " \t");
-	execout_to_pipe(left);
-	my_fdcpy(1, left->pipefd[0]);
+	if (root->left != NULL)
+		write_output(root->left->item);
+	if (root->right != NULL)
+		write_output(root->right->item);
+	this->pipefd[0] = 0;
 	return (0);
 }
