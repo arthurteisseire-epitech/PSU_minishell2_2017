@@ -52,3 +52,26 @@ int redir1_left(btree_t *root)
 	cmd->pipefd[0] = cmd_left->pipefd[0];
 	return (0);
 }
+
+int redir2_left(btree_t *root)
+{
+	cmd_t *this = root->item;
+	cmd_t *cmd_right = root->right->item;
+	char *line;
+	char *res = NULL;
+
+	my_putstr("? ");
+	line = get_next_line(0);
+	while (line != NULL && my_strcmp(line, cmd_right->str) != 0) {
+		res = concat(res, line, my_strlen(line));
+		free(line);
+		res = concat(res, "\n", 1);
+		my_putstr("? ");
+		line = get_next_line(0);
+	}
+	pipe(this->pipefd);
+	write(this->pipefd[1], res, my_strlen(res));
+	close(this->pipefd[1]);
+	free(res);
+	return (0);
+}

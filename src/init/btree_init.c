@@ -15,9 +15,9 @@ static const dicf_t sep[NB_SEP] = {
 	{";", semi_colons},
 	{">>", redir2_right},
 	{">", redir1_right},
-	{"<", redir1_left},
-	{"|", exec_pipe}
-	/*{"<<", exec_redir2_left},*/
+	{"|", exec_pipe},
+	{"<<", redir2_left},
+	{"<", redir1_left}
 };
 
 static int get_index(char *str)

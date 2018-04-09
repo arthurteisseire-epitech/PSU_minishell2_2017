@@ -15,7 +15,7 @@
 #include <stdio.h>
 #include <dirent.h>
 
-#define NB_SEP 5
+#define NB_SEP 6
 #define SEGFAULT 11
 #define DIVZERO 8
 
@@ -25,7 +25,6 @@ typedef struct cmd {
 	int pipefd[2];
 	int (*exec)(btree_t *root);
 	char *str;
-	char *sep;
 } cmd_t;
 
 typedef struct sh {
@@ -41,6 +40,7 @@ int exec_pipe(btree_t *root);
 int execout_to_pipe(cmd_t *cmd);
 int redir2_right(btree_t *root);
 int redir1_right(btree_t *root);
+int redir2_left(btree_t *root);
 int redir1_left(btree_t *root);
 int btree_exec(btree_t *root);
 int exec_cmd(char *cmd);
