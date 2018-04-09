@@ -44,7 +44,7 @@ int redir1_left(btree_t *root)
 
 	if (fd < 0)
 		return (fd);
-	my_fdcpy(cmd->pipefd[1], fd);
+	my_fdcpy(cmd->pipefd[0], fd);
 	execout_to_pipe(root->item);
 	return (0);
 }

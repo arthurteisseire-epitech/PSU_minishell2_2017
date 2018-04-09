@@ -53,6 +53,8 @@ int main(int ac, char **av)
 		exec_cmd(this->str);
 	else
 		btree_exec(root);
+	if (this->pipefd[0] != 0)
+		my_fdcpy(1, this->pipefd[0]);
 	bufferize(NULL);
 	return (0);
 }
