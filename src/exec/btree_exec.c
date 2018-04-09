@@ -24,7 +24,7 @@ int btree_exec(btree_t *root)
 	}
 	this = root->item;
 	if (this->exec != NULL)
-		this->exec(root);
+		this->pipefd[0] = this->exec(root);
 	if (root->right != NULL) {
 		cmd_right = root->right->item;
 		if (cmd_right->exec != NULL) {
