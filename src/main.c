@@ -10,7 +10,7 @@
 #include "mysh.h"
 #include "init.h"
 
-int main_old(int ac, char **av)
+int main(int ac, char **av)
 {
 	sh_t sh;
 	int status;
@@ -38,60 +38,29 @@ int print_node(btree_t *root)
 	return (0);
 }
 
-int main(int ac, char **av)
+int main_old(int ac, char **av)
+{
+	if (ac != 2)
+		return (84);
+	exec(av[1]);
+	return (0);
+}
+
+int exec(char *cmd)
 {
 	btree_t *root;
 	cmd_t *this;
 
-	if (ac != 2)
-		return (84);
-	btree_init(&root, av[1]);
+	btree_init(&root, cmd);
 	if (root == NULL)
-		return (84);
+		return (-1);
 	this = root->item;
 	if (this->str != NULL)
-		exec_cmd(this->str);
+		fork_and_exec(this->str);
 	else
 		btree_exec(root);
 	if (this->pipefd[0] != 0)
 		my_fdcpy(1, this->pipefd[0]);
-	bufferize(NULL);
+	close(this->pipefd[0]);
 	return (0);
 }
-
-/*
- *int main(void)
- *{
- *        cmd_t cmd;
- *        char *str_left[] = {"/bin/ls", "-l", NULL};
- *        char *str_right[] = {"/bin/grep", "a", NULL};
- *        char *str_end[] = {"/bin/cat", "-e", NULL};
- *        char buff[1];
- *
- *        cmd.pipefd[0] = 0;
- *        cmd.pipefd[1] = 1;
- *        execout_to_pipe(&cmd, str_left);
- *        execout_to_pipe(&cmd, str_right);
- *        execout_to_pipe(&cmd, str_end);
- *        while (read(cmd.pipefd[0], buff, 1) != 0)
- *                write(1, buff, 1);
- *        close(cmd.pipefd[0]);
- *        return (0);
- *}
- */
-/*
- *
- *int main(void)
- *{
- *        char *s = get_next_line(0);
- *        char *curr = get_next_word(&s, ";");
- *        btree_t *root = btree_create_node(";");
- *
- *        while (curr != NULL) {
- *                btree_insert_data(root, my_strip(&curr, " \t"), my_strcmp);
- *                curr = get_next_word(&s, ";");
- *        }
- *        btree_apply_prefix(root, dispf);
- *        return (0);
- *}
- */

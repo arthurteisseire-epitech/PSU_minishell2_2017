@@ -54,16 +54,15 @@ int run(sh_t *sh)
 	while (1) {
 		my_putstr("$> ");
 		line = get_next_line(0);
-		if (call_exit(line))
+		if (call_exit(line)) {
+			printf("printf(line): %s\n", line);
 			return (sh->rvalue);
-		sh->cmd = split(line, " \t");
-		free(line);
-		status = fork_and_exec(line);
-		free_array(sh->cmd);
-		if (status != 2) {
-			sh->rvalue = status;
-			return (status);
 		}
+		status = exec(line);
+		/*if (status != 2) {*/
+			/*sh->rvalue = status;*/
+			/*return (status);*/
+		/*}*/
 	}
 }
 

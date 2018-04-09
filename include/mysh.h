@@ -35,6 +35,7 @@ typedef struct sh {
 
 extern char **environ;
 
+int exec(char *cmd);
 int semi_colons(btree_t *root);
 int exec_pipe(btree_t *root);
 int execout_to_pipe(cmd_t *cmd);
