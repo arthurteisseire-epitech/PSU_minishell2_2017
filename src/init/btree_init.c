@@ -71,10 +71,6 @@ btree_t *btree_new_node(cmd_t *cmd, int index, char *(get)())
 	my_strip(&new->str, " \t");
 	if (new == NULL)
 		return (NULL);
-	if (new->str != NULL && my_strcmp(new->str, "") == 0) {
-		//free_and_set((void **)&new->str, NULL, free);
-		//new->str = NULL;
-	}
 	return (btree_create_node(new));
 }
 
@@ -84,7 +80,6 @@ cmd_t *new_cmd(char *str)
 	if (cmd == NULL)
 		return (NULL);
 	cmd->str = str;
-	cmd->array = NULL;
 	cmd->exec = NULL;
 	return (cmd);
 }

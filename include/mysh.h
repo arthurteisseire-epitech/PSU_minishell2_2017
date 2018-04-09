@@ -25,7 +25,6 @@ typedef struct cmd {
 	int pipefd[2];
 	int (*exec)(btree_t *root);
 	char *str;
-	char **array;
 	char *sep;
 } cmd_t;
 

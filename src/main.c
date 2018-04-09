@@ -59,23 +59,6 @@ int main(int ac, char **av)
 	return (0);
 }
 
-int main_old2(void)
-{
-	cmd_t cmd1;
-	cmd_t cmd2;
-	char *array1[] = {"ls", "-l", NULL};
-	char *array2[] = {"cat", "-e", NULL};
-
-	cmd1.array = array1;
-	cmd1.pipefd[0] = 0;
-	cmd2.array = array2;
-	execout_to_pipe(&cmd1);
-	cmd2.pipefd[0] = cmd1.pipefd[0];
-	execout_to_pipe(&cmd2);
-	my_fdcpy(1, cmd2.pipefd[0]);
-	return (0);
-}
-
 /*
  *int main(void)
  *{
