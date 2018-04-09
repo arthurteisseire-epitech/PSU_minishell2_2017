@@ -51,28 +51,26 @@ int run(sh_t *sh)
 	char *line = NULL;
 	int status = 0;
 
-	while (1) {
-		my_putstr("$> ");
-		line = get_next_line(0);
-		if (call_exit(line)) {
-			printf("printf(line): %s\n", line);
-			return (sh->rvalue);
-		}
+	my_putstr("$> ");
+	line = get_next_line(0);
+	while (!call_exit(line)) {
 		status = exec(line);
+		my_putstr("$> ");
+		free(line);
+		line = get_next_line(0);
+		//printf("%s\n", line);
 		/*if (status != 2) {*/
 			/*sh->rvalue = status;*/
 			/*return (status);*/
 		/*}*/
 	}
+	printf("printf(line): %s\n", line);
+	return (sh->rvalue);
 }
 
 int call_exit(char *line)
 {
-	if (line == NULL) {
-		my_putstr("exit\n");
-		return (1);
-	}
-	if (my_strcmp(line, "exit") == 0) {
+	if (line == NULL || my_strcmp(line, "exit") == 0) {
 		my_putstr("exit\n");
 		free(line);
 		return (1);

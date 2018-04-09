@@ -24,6 +24,7 @@ DINIT	=	$(DSRC)init/
 
 SRC     =	$(DSRC)main.c			\
 		$(DINIT)btree_init.c		\
+		$(DEXEC)exec.c			\
 		$(DEXEC)execout_to_pipe.c	\
 		$(DEXEC)exec_cmd.c		\
 		$(DEXEC)btree_exec.c		\

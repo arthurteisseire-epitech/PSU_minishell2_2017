@@ -45,22 +45,3 @@ int main_old(int ac, char **av)
 	exec(av[1]);
 	return (0);
 }
-
-int exec(char *cmd)
-{
-	btree_t *root;
-	cmd_t *this;
-
-	btree_init(&root, cmd);
-	if (root == NULL)
-		return (-1);
-	this = root->item;
-	if (this->str != NULL)
-		fork_and_exec(this->str);
-	else
-		btree_exec(root);
-	if (this->pipefd[0] != 0)
-		my_fdcpy(1, this->pipefd[0]);
-	close(this->pipefd[0]);
-	return (0);
-}

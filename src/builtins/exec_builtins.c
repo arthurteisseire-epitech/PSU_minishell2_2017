@@ -12,13 +12,16 @@
 static const builtins_t builtins[NB_BUILTINS] = {
 	{"cd", cd},
 	{"env", my_env},
-	{"unsetenv", my_unsetenv},
-	{"setenv", my_setenv}
+	{"setenv", my_setenv},
+	{"unsetenv", my_unsetenv}
 };
 
 int exec_builtins(char *cmd)
 {
 	char **array = split(cmd, " \t");
+
+	if (array == NULL)
+		return (-1);
 	for (int i = 0; i < NB_BUILTINS; i++)
 		if (my_strcmp(builtins[i].name, array[0]) == 0) {
 			builtins[i].f(array);
