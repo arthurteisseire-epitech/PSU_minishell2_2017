@@ -21,8 +21,7 @@ int exec_pipe(btree_t *root)
 	cmd_right->pipefd[0] = cmd_left->pipefd[0];
 	if (cmd_right->str != NULL)
 		execout_to_pipe(root->right->item);
-	this->pipefd[0] = cmd_right->pipefd[0];
-	return (0);
+	return (cmd_right->pipefd[0]);
 }
 
 int execout_to_pipe(cmd_t *cmd)
