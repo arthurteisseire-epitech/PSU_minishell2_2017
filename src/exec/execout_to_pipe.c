@@ -17,10 +17,11 @@ int exec_pipe(btree_t *root)
 	cmd_t *cmd_right = root->right->item;
 
 	cmd_left->pipefd[0] = this->pipefd[0];
-	execout_to_pipe(root->left->item);
+	if (cmd_left->str != NULL)
+		execout_to_pipe(cmd_left);
 	cmd_right->pipefd[0] = cmd_left->pipefd[0];
 	if (cmd_right->str != NULL)
-		execout_to_pipe(root->right->item);
+		execout_to_pipe(cmd_right);
 	return (cmd_right->pipefd[0]);
 }
 
