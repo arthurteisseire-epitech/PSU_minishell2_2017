@@ -64,7 +64,6 @@ int run(sh_t *sh)
 			/*return (status);*/
 		/*}*/
 	}
-	printf("printf(line): %s\n", line);
 	return (sh->rvalue);
 }
 

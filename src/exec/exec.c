@@ -26,6 +26,5 @@ int exec(char *cmd)
 		status = btree_exec(root);
 	if (this->pipefd[0] != 0)
 		my_fdcpy(1, this->pipefd[0]);
-	close(this->pipefd[0]);
 	return (status);
 }
