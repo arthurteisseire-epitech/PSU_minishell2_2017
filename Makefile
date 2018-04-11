@@ -33,6 +33,7 @@ SRC     =	$(DSRC)main.c			\
 		$(DMYSH)run.c			\
 		$(DMYSH)my_perror.c		\
 		$(DBUILTS)env.c			\
+		$(DBUILTS)my_exit.c		\
 		$(DBUILTS)cd.c			\
 		$(DBUILTS)exec_builtins.c
 CFLAGS	+=	-Wall -W -Wextra -I$(INC) -g

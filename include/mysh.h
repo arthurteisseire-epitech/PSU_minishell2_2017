@@ -18,6 +18,7 @@
 #define NB_SEP 6
 #define SEGFAULT 11
 #define DIVZERO 8
+#define EXIT 7
 
 typedef struct btree btree_t;
 

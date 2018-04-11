@@ -13,7 +13,8 @@ static const builtins_t builtins[NB_BUILTINS] = {
 	{"cd", cd},
 	{"env", my_env},
 	{"setenv", my_setenv},
-	{"unsetenv", my_unsetenv}
+	{"unsetenv", my_unsetenv},
+	{"exit", my_exit}
 };
 
 int exec_builtins(char *cmd)
@@ -23,9 +24,7 @@ int exec_builtins(char *cmd)
 	if (array == NULL)
 		return (-1);
 	for (int i = 0; i < NB_BUILTINS; i++)
-		if (my_strcmp(builtins[i].name, array[0]) == 0) {
-			builtins[i].f(array);
-			return (1);
-		}
-	return (0);
+		if (my_strcmp(builtins[i].name, array[0]) == 0)
+			return (builtins[i].f(array));
+	return (2);
 }

@@ -24,6 +24,7 @@ int cd(char **args);
 int my_setenv(char **args);
 int my_unsetenv(char **args);
 int my_env(char **args);
+int my_exit(char __attribute((unused)) **array);
 int add_var(char **args);
 
 #endif

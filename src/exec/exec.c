@@ -22,7 +22,9 @@ int exec(char *cmd)
 	this = root->item;
 	if (this->str != NULL) {
 		if (my_strcmp(this->str, ""))
-			fork_and_exec(this->str);
+			status = fork_and_exec(this->str);
+		if (status == EXIT)
+			exit(0);
 	} else {
 		status = btree_exec(root);
 	}

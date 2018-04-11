@@ -16,20 +16,26 @@ int exec_pipe(btree_t *root)
 	cmd_t *this = root->item;
 	cmd_t *cmd_left = root->left->item;
 	cmd_t *cmd_right = root->right->item;
+	int status = 0;
 
 	cmd_left->pipefd[0] = this->pipefd[0];
 	if (cmd_left->str != NULL)
-		execout_to_pipe(cmd_left);
+		status = execout_to_pipe(cmd_left);
+	if (status != 0)
+		return (status);
 	cmd_right->pipefd[0] = cmd_left->pipefd[0];
 	if (cmd_right->str != NULL)
-		execout_to_pipe(cmd_right);
-	return (cmd_right->pipefd[0]);
+		status = execout_to_pipe(cmd_right);
+	this->pipefd[0] = cmd_right->pipefd[0];
+	return (status);
 }
 
 int execout_to_pipe(cmd_t *cmd)
 {
 	int child_pid;
 	int oldread = cmd->pipefd[0];
+	int status = 0;
+	int wstatus;
 
 	pipe(cmd->pipefd);
 	child_pid = fork();
@@ -38,14 +44,20 @@ int execout_to_pipe(cmd_t *cmd)
 	if (child_pid == 0) {
 		dup2(oldread, 0);
 		dup2(cmd->pipefd[1], 1);
-		if (exec_builtins(cmd->str) != 1) {
+		status = exec_builtins(cmd->str);
+		if (status != 0) {
 			exec_cmd(cmd->str);
 			my_puterror("Command not found.\n");
 		}
-		exit(0);
+		exit(status);
 	} else {
-		wait(NULL);
+		wait(&wstatus);
+		status = handle_status(wstatus);
+		if (status == EXIT) {
+			my_putstr("exit\n");
+			exit(0);
+		}
 		close(cmd->pipefd[1]);
 	}
-	return (0);
+	return (status);
 }

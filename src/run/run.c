@@ -32,8 +32,9 @@ int fork_and_exec(char *cmd)
 {
 	pid_t child_pid;
 	int wstatus;
+	int status = exec_builtins(cmd);
 
-	if (!exec_builtins(cmd)) {
+	if (status == 2) {
 		child_pid = fork();
 		if (child_pid == 0) {
 			exit(exec_cmd(cmd));
@@ -43,7 +44,7 @@ int fork_and_exec(char *cmd)
 		} else
 			return (-1);
 	}
-	return (2);
+	return (status);
 }
 
 int run(sh_t *sh)

@@ -38,8 +38,10 @@ int redir1_left(btree_t *root)
 	cmd_t *cmd_right = root->right->item;
 	int fd = open(cmd_right->str, O_RDONLY);
 
-	if (fd < 0)
+	if (fd < 0) {
+		my_perror(cmd_right->str);
 		return (fd);
+	}
 	cmd_left->pipefd[0] = fd;
 	execout_to_pipe(cmd_left);
 	return (cmd_left->pipefd[0]);
