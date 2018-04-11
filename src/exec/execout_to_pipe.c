@@ -53,9 +53,9 @@ int execout_to_pipe(cmd_t *cmd)
 	} else {
 		wait(&wstatus);
 		status = handle_status(wstatus);
-		if (status == EXIT) {
+		if (my_strncmp(cmd->str, "exit", 4) == 0) {
 			my_putstr("exit\n");
-			exit(0);
+			exit(status);
 		}
 		close(cmd->pipefd[1]);
 	}

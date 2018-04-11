@@ -12,21 +12,19 @@
 
 int main(int ac, char **av)
 {
-	sh_t sh;
 	int status;
 
-	sh.rvalue = 0;
 	if (ac != 1) {
 		my_puterror(av[0]);
 		my_puterror(": The program must take one argument\n");
 		return (84);
 	}
-	status = run(&sh);
+	status = run();
 	if (status == -1) {
 		my_puterror("\nAn error occured\n");
 		return (84);
 	}
-	return (sh.rvalue);
+	return (status);
 }
 
 int print_node(btree_t *root)
