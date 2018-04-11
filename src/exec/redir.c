@@ -53,13 +53,13 @@ int redir2_left(btree_t *root)
 	char *res = NULL;
 
 	my_putstr("? ");
-	line = get_next_line(0);
+	line = gnl(0);
 	while (line != NULL && my_strcmp(line, cmd_right->str) != 0) {
 		res = concat(res, line, my_strlen(line));
 		res = concat(res, "\n", 1);
 		free(line);
 		my_putstr("? ");
-		line = get_next_line(0);
+		line = gnl(0);
 	}
 	pipe(cmd_left->pipefd);
 	write(cmd_left->pipefd[1], res, my_strlen(res));

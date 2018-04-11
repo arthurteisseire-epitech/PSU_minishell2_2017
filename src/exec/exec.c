@@ -20,10 +20,12 @@ int exec(char *cmd)
 	if (status != 0)
 		return (status);
 	this = root->item;
-	if (this->str != NULL)
-		fork_and_exec(this->str);
-	else
+	if (this->str != NULL) {
+		if (my_strcmp(this->str, ""))
+			fork_and_exec(this->str);
+	} else {
 		status = btree_exec(root);
+	}
 	if (this->pipefd[0] != 0)
 		my_fdcpy(1, this->pipefd[0]);
 	return (status);

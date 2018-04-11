@@ -10,7 +10,7 @@
 
 #include <fcntl.h>
 
-#define NB_BUILTINS 4
+#define NB_BUILTINS 5
 
 typedef struct sh sh_t;
 

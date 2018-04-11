@@ -36,7 +36,7 @@ int fork_and_exec(char *cmd)
 	if (!exec_builtins(cmd)) {
 		child_pid = fork();
 		if (child_pid == 0) {
-			return (exec_cmd(cmd));
+			exit(exec_cmd(cmd));
 		} else if (child_pid > 0) {
 			wait(&wstatus);
 			return (handle_status(wstatus));
@@ -48,21 +48,11 @@ int fork_and_exec(char *cmd)
 
 int run(sh_t *sh)
 {
-	char *line = NULL;
-	int status = 0;
-
 	my_putstr("$> ");
-	line = get_next_line(0);
-	while (!call_exit(line)) {
-		status = exec(line);
-		my_putstr("$> ");
+	for (char *line = gnl(0); !call_exit(line); line = gnl(0)) {
+		exec(line);
 		free(line);
-		line = get_next_line(0);
-		//printf("%s\n", line);
-		/*if (status != 2) {*/
-			/*sh->rvalue = status;*/
-			/*return (status);*/
-		/*}*/
+		my_putstr("$> ");
 	}
 	return (sh->rvalue);
 }

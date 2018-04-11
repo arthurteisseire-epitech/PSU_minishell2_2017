@@ -10,7 +10,7 @@
 
 #define READ_SIZE 4096
 
-char*	get_next_line(int fd);
+char*	gnl(int fd);
 
 char*	get_env_value(char const *var, char **env);
 int	index_name(char *var_name, char **env);

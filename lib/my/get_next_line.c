@@ -28,7 +28,7 @@ static char *cut_line(char **begin, char *line, int index_bn)
 	return (line);
 }
 
-char *get_next_line(int fd)
+char *gnl(int fd)
 {
 	static char buffer[READ_SIZE];
 	static char *begin = buffer;
