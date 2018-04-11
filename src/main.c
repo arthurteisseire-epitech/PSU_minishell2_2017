@@ -21,7 +21,7 @@ int main(int ac, char **av)
 		my_puterror(": The program must take one argument\n");
 		return (84);
 	}
-	status = mysh(&sh);
+	status = run(&sh);
 	if (status == -1) {
 		my_puterror("\nAn error occured\n");
 		return (84);

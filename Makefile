@@ -30,7 +30,6 @@ SRC     =	$(DSRC)main.c			\
 		$(DEXEC)btree_exec.c		\
 		$(DEXEC)redir.c			\
 		$(DEXEC)semi_colons.c		\
-		$(DMYSH)mysh.c			\
 		$(DMYSH)run.c			\
 		$(DMYSH)my_perror.c		\
 		$(DBUILTS)env.c			\
