@@ -11,7 +11,7 @@
 #include "mysh.h"
 #include "builtins.h"
 
-static int handle_status(int wstatus)
+int handle_status(int wstatus)
 {
 	if (WIFEXITED(wstatus))
 		return (WEXITSTATUS(wstatus));

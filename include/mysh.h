@@ -49,5 +49,6 @@ int run(sh_t *sh);
 int mysh(sh_t *sh);
 int call_exit(char *cmd);
 void my_perror(char *str);
+int handle_status(int wstatus);
 
 #endif

@@ -5,9 +5,9 @@ tester*
 tests.sample
 README
 tests
-main.c
 a.out
 *.a
 *.swp
 vgcore.*
 mysh
+lib/tree/main.c

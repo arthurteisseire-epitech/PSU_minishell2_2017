@@ -13,7 +13,7 @@ static void write_output(cmd_t *cmd)
 {
 	if (cmd->str != NULL && my_strcmp(cmd->str, "") != 0)
 		fork_and_exec(cmd->str);
-	if (cmd->pipefd[0] != 0) 
+	if (cmd->pipefd[0] != 0)
 		my_fdcpy(1, cmd->pipefd[0]);
 }
 
