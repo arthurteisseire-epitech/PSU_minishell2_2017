@@ -24,7 +24,7 @@ int main(int ac, char **av)
 		my_puterror("\nAn error occured\n");
 		return (84);
 	}
-	return (status);
+	return (status % 256);
 }
 
 int print_node(btree_t *root)
