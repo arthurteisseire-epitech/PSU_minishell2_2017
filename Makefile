@@ -18,7 +18,7 @@ TREE	=	tree
 LIBS	=	-L$(DMY) -l$(MY) -L$(DTREE) -l$(TREE)
 
 DBUILTS	=	$(DSRC)builtins/
-DMYSH	=	$(DSRC)mysh/
+DMYSH	=	$(DSRC)run/
 DEXEC	=	$(DSRC)exec/
 DINIT	=	$(DSRC)init/
 
