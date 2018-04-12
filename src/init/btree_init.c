@@ -34,14 +34,14 @@ int btree_init(btree_t **root, char *str)
 	cmd_t *cmd = new_cmd(my_strdup(str));
 
 	if (cmd == NULL)
-		return (-1);
+		return (ERROR);
 	*root = btree_create_node(cmd);
 	if (root == NULL)
-		return (-1);
+		return (ERROR);
 	this = (*root)->item;
 	this->pipefd[0] = 0;
 	if (btree_apply_last(*root, btree_fill) == -1)
-		return (-1);
+		return (ERROR);
 	return (0);
 }
 
@@ -53,15 +53,15 @@ int btree_fill(btree_t *root)
 	if (i != -1) {
 		root->left = btree_new_node(this, i, get_before_to);
 		if (root->left == NULL)
-			return (-1);
+			return (ERROR);
 		root->right = btree_new_node(this, i, get_next_to);
 		if (root->right == NULL)
-			return (-1);
+			return (ERROR);
 		this->exec = sep[i].f;
 		free_and_set((void **)&this->str, NULL, free);
 		return (0);
 	}
-	return (1);
+	return (2);
 }
 
 btree_t *btree_new_node(cmd_t *cmd, int index, char *(get)())

@@ -68,7 +68,7 @@ int exec_cmd(char *cmd)
 	char **array = split(cmd, " \t");
 
 	if (array == NULL)
-		return (-1);
+		return (ERROR);
 	if (array[0] && access(array[0], F_OK) != -1) {
 		if (!right_ok(array[0]))
 			return (ERROR);

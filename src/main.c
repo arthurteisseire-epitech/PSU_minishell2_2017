@@ -20,10 +20,6 @@ int main(int ac, char **av)
 		return (84);
 	}
 	status = run();
-	if (status == -1) {
-		my_puterror("\nAn error occured\n");
-		return (84);
-	}
 	return (status % 256);
 }
 

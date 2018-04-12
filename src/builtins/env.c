@@ -61,7 +61,7 @@ int add_var(char **args)
 		i++;
 	environ[i] = array_to_str(args, "=");
 	if (environ[i] == NULL)
-		return (-1);
+		return (ERROR);
 	environ[i + 1] = NULL;
 	return (0);
 }
