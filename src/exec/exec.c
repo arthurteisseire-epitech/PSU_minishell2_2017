@@ -30,5 +30,6 @@ int exec(char *cmd, int pipefd[2])
 		my_fdcpy(1, pipefd[0]);
 		close(pipefd[0]);
 	}
+	btree_free(root, node_destroy);
 	return (status);
 }

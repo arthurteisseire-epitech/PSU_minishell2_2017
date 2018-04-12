@@ -20,11 +20,16 @@ static const builtins_t builtins[NB_BUILTINS] = {
 int exec_builtins(char *cmd)
 {
 	char **array = split(cmd, " \t");
+	int status;
 
 	if (array == NULL)
 		return (ERROR);
 	for (int i = 0; i < NB_BUILTINS; i++)
-		if (my_strcmp(builtins[i].name, array[0]) == 0)
-			return (builtins[i].f(array));
+		if (my_strcmp(builtins[i].name, array[0]) == 0) {
+			status = builtins[i].f(array);
+			free_array(array);
+			return (status);
+		}
+	free_array(array);
 	return (2);
 }
