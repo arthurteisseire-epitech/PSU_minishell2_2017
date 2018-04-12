@@ -26,7 +26,7 @@ static void set_env_pwd(void)
 	char *pwd = get_env_value("PWD", environ);
 	char *path = get_path();
 
-	if (my_strcmp(pwd, path) != 0) {
+	if (path != NULL && my_strcmp(pwd, path) != 0) {
 		set_env_value("OLDPWD", pwd, environ);
 		set_env_value("PWD", path, environ);
 	}
@@ -40,11 +40,11 @@ int cd(char **args)
 	int status;
 
 	if (args == NULL || args[0] == NULL)
-		return (-1);
+		return (ERROR);
 	i += my_arrlen((void **)args);
 	if (i > 2) {
 		my_puterror("cd: Too many arguments.\n");
-		return (-1);
+		return (ERROR);
 	}
 	if (i == 1)
 		status = chdir(get_env_value("HOME", environ));
@@ -53,5 +53,5 @@ int cd(char **args)
 	else
 		status = chdir(args[1]);
 	status == -1 ? my_perror(args[1]) : set_env_pwd();
-	return (status);
+	return (status == -1 ? 1 : status);
 }

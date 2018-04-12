@@ -48,7 +48,7 @@ int redir1_left(btree_t *root)
 
 	if (fd < 0) {
 		my_perror(cmd_right->str);
-		return (fd);
+		return (1);
 	}
 	cmd_left->pipefd[0] = fd;
 	status = execout_to_pipe(cmd_left);

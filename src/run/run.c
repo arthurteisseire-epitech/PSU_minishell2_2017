@@ -14,14 +14,14 @@
 int handle_status(int wstatus)
 {
 #ifdef WCOREDUMP
-	if (WCOREDUMP(wstatus) && WTERMSIG(wstatus) == SEGFAULT)
+	if (WTERMSIG(wstatus) == SEGFAULT) {
 		my_putstr("Segmentation fault\n");
-	else if (!WCOREDUMP(wstatus) && WTERMSIG(wstatus) == SEGFAULT)
-		my_putstr("Segmentation fault\n");
-	if (WCOREDUMP(wstatus) && WTERMSIG(wstatus) == DIVZERO)
+		return (139);
+	}
+	if (WTERMSIG(wstatus) == DIVZERO) {
 		my_putstr("Floating exception\n");
-	else if (!WCOREDUMP(wstatus) && WTERMSIG(wstatus) == DIVZERO)
-		my_putstr("Floating exception\n");
+		return (136);
+	}
 #endif
 	if (WIFEXITED(wstatus))
 		return (WEXITSTATUS(wstatus));
@@ -36,13 +36,14 @@ int fork_and_exec(char *cmd)
 
 	if (status == 2) {
 		child_pid = fork();
+		if (child_pid < 0)
+			return (ERROR);
 		if (child_pid == 0) {
 			exit(exec_cmd(cmd));
-		} else if (child_pid > 0) {
+		} else {
 			wait(&wstatus);
 			return (handle_status(wstatus));
-		} else
-			return (-1);
+		}
 	}
 	return (status);
 }
@@ -53,11 +54,6 @@ int run(void)
 
 	my_putstr("$> ");
 	for (char *line = gnl(0); !call_exit(line); line = gnl(0)) {
-		if (my_strcmp(line, "exit") == 0) {
-			my_putstr("exit\n");
-			free(line);
-			return (0);
-		}
 		status = exec(line);
 		free(line);
 		my_putstr("$> ");

@@ -22,7 +22,7 @@ int exec_builtins(char *cmd)
 	char **array = split(cmd, " \t");
 
 	if (array == NULL)
-		return (-1);
+		return (ERROR);
 	for (int i = 0; i < NB_BUILTINS; i++)
 		if (my_strcmp(builtins[i].name, array[0]) == 0)
 			return (builtins[i].f(array));

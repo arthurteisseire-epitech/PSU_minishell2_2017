@@ -5,6 +5,7 @@ tester*
 tests.sample
 README
 tests
+sigseg.c
 a.out
 *.a
 *.swp

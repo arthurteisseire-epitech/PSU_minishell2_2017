@@ -40,7 +40,7 @@ int execout_to_pipe(cmd_t *cmd)
 	pipe(cmd->pipefd);
 	child_pid = fork();
 	if (child_pid == -1)
-		return (-1);
+		return (ERROR);
 	if (child_pid == 0) {
 		dup2(oldread, 0);
 		dup2(cmd->pipefd[1], 1);
