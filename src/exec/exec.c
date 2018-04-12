@@ -10,7 +10,7 @@
 #include "btree.h"
 #include "init.h"
 
-int exec(char *cmd)
+int exec(char *cmd, int pipefd[2])
 {
 	btree_t *root;
 	cmd_t *this;
@@ -24,9 +24,11 @@ int exec(char *cmd)
 		if (my_strcmp(this->str, ""))
 			status = fork_and_exec(this->str);
 	} else {
-		status = btree_exec(root);
+		status = btree_exec(root, pipefd);
 	}
-	if (this->pipefd[0] != 0)
-		my_fdcpy(1, this->pipefd[0]);
+	if (pipefd[0] != 0) {
+		my_fdcpy(1, pipefd[0]);
+		close(pipefd[0]);
+	}
 	return (status);
 }

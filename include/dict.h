@@ -13,7 +13,7 @@ typedef int (*cmd_f)();
 
 typedef struct dicf {
 	char *str;
-	int (*f)(btree_t *);
+	int (*f)(btree_t *, int pipefd[2]);
 } dicf_t;
 
 #endif

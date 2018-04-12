@@ -9,21 +9,19 @@
 #include "my.h"
 #include "btree.h"
 
-static void write_output(cmd_t *cmd)
+static void write_output(cmd_t *cmd, int pipefd[2])
 {
 	if (cmd->str != NULL && my_strcmp(cmd->str, "") != 0)
 		fork_and_exec(cmd->str);
-	if (cmd->pipefd[0] != 0)
-		my_fdcpy(1, cmd->pipefd[0]);
+	if (pipefd[0] != 0)
+		my_fdcpy(1, pipefd[0]);
 }
 
-int semi_colons(btree_t *root)
+int semi_colons(btree_t *root, int pipefd[2])
 {
-	cmd_t *this = root->item;
-
 	if (root->left != NULL)
-		write_output(root->left->item);
+		write_output(root->left->item, pipefd);
 	if (root->right != NULL)
-		write_output(root->right->item);
-	return (this->pipefd[0]);
+		write_output(root->right->item, pipefd);
+	return (pipefd[0]);
 }

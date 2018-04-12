@@ -39,7 +39,6 @@ int btree_init(btree_t **root, char *str)
 	if (root == NULL)
 		return (ERROR);
 	this = (*root)->item;
-	this->pipefd[0] = 0;
 	if (btree_apply_last(*root, btree_fill) == -1)
 		return (ERROR);
 	return (0);

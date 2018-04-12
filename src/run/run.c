@@ -50,11 +50,14 @@ int fork_and_exec(char *cmd)
 
 int run(void)
 {
+	int pipefd[2];
 	int status = 0;
 
 	my_putstr("$> ");
 	for (char *line = gnl(0); !call_exit(line); line = gnl(0)) {
-		status = exec(line);
+		pipefd[0] = 0;
+		pipefd[1] = 0;
+		status = exec(line, pipefd);
 		free(line);
 		my_putstr("$> ");
 	}

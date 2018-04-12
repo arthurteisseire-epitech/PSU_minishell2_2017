@@ -34,8 +34,11 @@ int print_node(btree_t *root)
 
 int main_old(int ac, char **av)
 {
+	int pipefd[0];
+
+	pipefd[0] = 0;
 	if (ac != 2)
 		return (84);
-	exec(av[1]);
+	exec(av[1], pipefd);
 	return (0);
 }
