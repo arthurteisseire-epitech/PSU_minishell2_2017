@@ -12,7 +12,8 @@ int my_str_isalphanum(char const *str)
 	while (str[i] != '\0') {
 		if ((str[i] >= 'a' && str[i] <= 'z')
 		|| (str[i] >= 'A' && str[i] <= 'Z')
-		|| (str[i] >= '0' && str[i] <= '9'))
+		|| (str[i] >= '0' && str[i] <= '9')
+		|| (str[i] == '_'))
 			i++;
 		else
 			return (0);
