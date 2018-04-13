@@ -14,7 +14,7 @@ int my_exit(char **array)
 	int len = my_arrlen((void **)array);
 
 	if (len == 1) {
-		my_putstr("exit");
+		my_putstr("exit\n");
 		exit(0);
 	}
 	if (len > 2 || !my_str_isnum(array[1])) {
@@ -22,4 +22,5 @@ int my_exit(char **array)
 		return (ERROR);
 	}
 	exit(my_atoi(array[1]));
+	my_putstr("exit\n");
 }
