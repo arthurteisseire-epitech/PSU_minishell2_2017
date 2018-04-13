@@ -21,4 +21,7 @@ typedef struct dicf {
 
 extern const dicf_t sep[NB_SEP];
 
+int parse_null(btree_t *root);
+int parse_ambigous(char *str);
+
 #endif

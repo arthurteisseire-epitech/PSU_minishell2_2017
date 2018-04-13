@@ -9,6 +9,23 @@
 #include "my.h"
 #include "btree.h"
 #include "init.h"
+#include "parse.h"
+
+static int init(btree_t **root, char *cmd)
+{
+	int status = 0;
+
+	status = parse_ambigous(cmd);
+	if (status != 0)
+		return (status);
+	status = btree_init(root, cmd);
+	if (status != 0)
+		return (status);
+	status = btree_apply_nodes(*root, parse_null);
+	if (status != 0)
+		return (status);
+	return (status);
+}
 
 int exec(char *cmd, int pipefd[2])
 {
@@ -16,10 +33,7 @@ int exec(char *cmd, int pipefd[2])
 	cmd_t *this;
 	int status = 0;
 
-	status = parse_ambigous(cmd);
-	if (status != 0)
-		return (status);
-	status = btree_init(&root, cmd);
+	status = init(&root, cmd);
 	if (status != 0)
 		return (status);
 	this = root->item;

@@ -44,7 +44,6 @@ int call_exit(char *cmd);
 void my_perror(char *str);
 int handle_status(int wstatus);
 int node_destroy(void *ptr);
-int parse_ambigous(char *str);
 int get_index(char *str);
 
 #endif

@@ -32,11 +32,7 @@ int btree_fill(btree_t *root)
 
 	if (i != -1) {
 		root->left = btree_new_node(this, i, get_before_to);
-		if (root->left == NULL)
-			return (ERROR);
 		root->right = btree_new_node(this, i, get_next_to);
-		if (root->right == NULL)
-			return (ERROR);
 		this->exec = sep[i].f;
 		free_and_set((void **)&this->str, NULL, free);
 		return (0);
@@ -51,6 +47,8 @@ btree_t *btree_new_node(cmd_t *cmd, int index, char *(get)())
 	my_strip(&new->str, " \t");
 	if (new == NULL)
 		return (NULL);
+	if (my_strcmp(new->str, "") == 0)
+		return (free(new->str), NULL);
 	return (btree_create_node(new));
 }
 

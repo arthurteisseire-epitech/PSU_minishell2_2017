@@ -7,11 +7,18 @@
 
 #include "btree.h"
 
-void btree_apply_nodes(btree_t *root, int (*applyf)(btree_t *))
+int btree_apply_nodes(btree_t *root, int (*applyf)(btree_t *))
 {
+	int status = 0;
+	
 	if (root->left != NULL)
-		btree_apply_nodes(root->left, applyf);
+		status = btree_apply_nodes(root->left, applyf);
+	if (status != 0)
+		return (status);
 	if (root->right != NULL)
-		btree_apply_nodes(root->right, applyf);
-	(*applyf)(root);
+		status = btree_apply_nodes(root->right, applyf);
+	if (status != 0)
+		return (status);
+	status = (*applyf)(root);
+	return (status);
 }
