@@ -71,7 +71,5 @@ int redir2_left(btree_t *root, int pipefd[2])
 	write(pipefd[1], res, my_strlen(res));
 	close(pipefd[1]);
 	status = execout_to_pipe(cmd_left, pipefd);
-	free(res);
-	pipefd[0] = pipefd[0];
-	return (status);
+	return (free(res), status);
 }

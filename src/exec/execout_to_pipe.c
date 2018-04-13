@@ -31,7 +31,6 @@ int execout_to_pipe(cmd_t *cmd, int pipefd[2])
 	int child_pid;
 	int oldread = pipefd[0];
 	int status = 0;
-	int wstatus;
 
 	pipe(pipefd);
 	child_pid = fork();
@@ -41,19 +40,25 @@ int execout_to_pipe(cmd_t *cmd, int pipefd[2])
 		dup2(oldread, 0);
 		dup2(pipefd[1], 1);
 		status = exec_builtins(cmd->str);
-		if (status != 0) {
+		if (status != 0)
 			exec_cmd(cmd->str);
-			my_puterror("Command not found.\n");
-		}
 		exit(status);
-	} else {
-		wait(&wstatus);
-		status = handle_status(wstatus);
-		if (my_strncmp(cmd->str, "exit", 4) == 0) {
-			my_putstr("exit\n");
-			exit(status);
-		}
-		close(pipefd[1]);
+	}
+	parent(cmd->str);
+	close(pipefd[1]);
+	return (status);
+}
+
+int parent(char *str)
+{
+	int wstatus;
+	int status = 0;
+
+	wait(&wstatus);
+	status = handle_status(wstatus);
+	if (my_strncmp(str, "exit", 4) == 0) {
+		my_putstr("exit\n");
+		exit(status);
 	}
 	return (status);
 }

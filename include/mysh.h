@@ -32,6 +32,7 @@ int exec(char *cmd, int pipefd[2]);
 int semi_colons(btree_t *root, int pipefd[2]);
 int exec_pipe(btree_t *root, int pipefd[2]);
 int execout_to_pipe(cmd_t *cmd, int pipefd[2]);
+int parent(char *str);
 int redir2_right(btree_t *root, int pipefd[2]);
 int redir1_right(btree_t *root, int pipefd[2]);
 int redir2_left(btree_t *root, int pipefd[2]);
