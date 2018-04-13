@@ -32,7 +32,7 @@ int print_node(btree_t *root)
 	return (0);
 }
 
-int main_old(int ac, char **av)
+int maino(int ac, char **av)
 {
 	int pipefd[0];
 

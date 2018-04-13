@@ -9,28 +9,10 @@
 #include "my.h"
 #include "mysh.h"
 #include "init.h"
-#include "dict.h"
-
-static const dicf_t sep[NB_SEP] = {
-	{";", semi_colons},
-	{">>", redir2_right},
-	{">", redir1_right},
-	{"|", exec_pipe},
-	{"<<", redir2_left},
-	{"<", redir1_left}
-};
-
-static int get_index(char *str)
-{
-	for (int i = 0; i < NB_SEP; i++)
-		if (my_strstr(str, sep[i].str) != NULL)
-			return (i);
-	return (-1);
-}
+#include "parse.h"
 
 int btree_init(btree_t **root, char *str)
 {
-	cmd_t *this;
 	cmd_t *cmd = new_cmd(my_strdup(str));
 
 	if (cmd == NULL)
@@ -38,7 +20,6 @@ int btree_init(btree_t **root, char *str)
 	*root = btree_create_node(cmd);
 	if (root == NULL)
 		return (ERROR);
-	this = (*root)->item;
 	if (btree_apply_last(*root, btree_fill) == -1)
 		return (ERROR);
 	return (0);

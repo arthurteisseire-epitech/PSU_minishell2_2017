@@ -22,6 +22,7 @@ DMYSH	=	$(DSRC)run/
 DEXEC	=	$(DSRC)exec/
 DINIT	=	$(DSRC)init/
 DESTROY	=	$(DSRC)destroy/
+DPARSE	=	$(DSRC)parse/
 
 SRC     =	$(DSRC)main.c			\
 		$(DINIT)btree_init.c		\
@@ -37,7 +38,9 @@ SRC     =	$(DSRC)main.c			\
 		$(DBUILTS)my_exit.c		\
 		$(DBUILTS)cd.c			\
 		$(DBUILTS)exec_builtins.c	\
-		$(DESTROY)node_destroy.c
+		$(DESTROY)node_destroy.c	\
+		$(DPARSE)parse_ambiguous.c	\
+		$(DPARSE)get_sep.c
 CFLAGS	+=	-Wall -W -Wextra -I$(INC) -g
 OBJ	=	$(SRC:.c=.o)
 NAME	=	mysh

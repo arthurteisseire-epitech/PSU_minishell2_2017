@@ -16,6 +16,9 @@ int exec(char *cmd, int pipefd[2])
 	cmd_t *this;
 	int status = 0;
 
+	status = parse_ambigous(cmd);
+	if (status != 0)
+		return (status);
 	status = btree_init(&root, cmd);
 	if (status != 0)
 		return (status);

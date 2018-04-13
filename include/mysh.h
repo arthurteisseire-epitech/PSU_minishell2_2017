@@ -15,7 +15,6 @@
 #include <stdio.h>
 #include <dirent.h>
 
-#define NB_SEP 6
 #define SEGFAULT 11
 #define DIVZERO 8
 #define ERROR 1
@@ -26,11 +25,6 @@ typedef struct cmd {
 	int (*exec)(btree_t *root, int pipefd[2]);
 	char *str;
 } cmd_t;
-
-typedef struct sh {
-	int rvalue;
-	char **cmd;
-} sh_t;
 
 extern char **environ;
 
@@ -50,5 +44,7 @@ int call_exit(char *cmd);
 void my_perror(char *str);
 int handle_status(int wstatus);
 int node_destroy(void *ptr);
+int parse_ambigous(char *str);
+int get_index(char *str);
 
 #endif
