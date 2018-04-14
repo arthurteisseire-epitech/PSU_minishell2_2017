@@ -41,10 +41,10 @@ int execout_to_pipe(cmd_t *cmd, int pipefd[2])
 		dup2(pipefd[1], 1);
 		status = exec_builtins(cmd->str);
 		if (status != 0)
-			exec_cmd(cmd->str);
+			status = exec_cmd(cmd->str);
 		exit(status);
 	}
-	parent(cmd->str);
+	status = parent(cmd->str);
 	close(pipefd[1]);
 	return (status);
 }
