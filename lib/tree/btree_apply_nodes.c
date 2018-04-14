@@ -10,7 +10,7 @@
 int btree_apply_nodes(btree_t *root, int (*applyf)(btree_t *))
 {
 	int status = 0;
-	
+
 	if (root->left != NULL)
 		status = btree_apply_nodes(root->left, applyf);
 	if (status != 0)
