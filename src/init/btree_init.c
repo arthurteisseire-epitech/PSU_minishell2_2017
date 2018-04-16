@@ -55,6 +55,7 @@ btree_t *btree_new_node(cmd_t *cmd, int index, char *(get)())
 cmd_t *new_cmd(char *str)
 {
 	cmd_t *cmd = malloc(sizeof(cmd_t));
+
 	if (cmd == NULL)
 		return (NULL);
 	cmd->str = str;
