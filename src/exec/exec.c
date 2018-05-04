@@ -13,16 +13,16 @@
 
 static int init(btree_t **root, char *cmd)
 {
-	int status = 0;
+	int status = EXIT_SUCCESS;
 
 	status = parse_ambigous(cmd);
-	if (status != 0)
+	if (status != EXIT_SUCCESS)
 		return (status);
 	status = btree_init(root, cmd);
-	if (status != 0)
+	if (status != EXIT_SUCCESS)
 		return (status);
 	status = btree_apply_nodes(*root, parse_null);
-	if (status != 0)
+	if (status != EXIT_SUCCESS)
 		return (status);
 	return (status);
 }
@@ -31,10 +31,10 @@ int exec(char *cmd, int pipefd[2])
 {
 	btree_t *root;
 	cmd_t *this;
-	int status = 0;
+	int status = EXIT_SUCCESS;
 
 	status = init(&root, cmd);
-	if (status != 0)
+	if (status != EXIT_SUCCESS)
 		return (status);
 	this = root->item;
 	if (this->str != NULL) {

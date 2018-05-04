@@ -15,11 +15,11 @@ int exec_pipe(btree_t *root, int pipefd[2])
 {
 	cmd_t *cmd_left = root->left->item;
 	cmd_t *cmd_right = root->right->item;
-	int status = 0;
+	int status = EXIT_SUCCESS;
 
 	if (cmd_left->str != NULL)
 		status = execout_to_pipe(cmd_left, pipefd);
-	if (status != 0)
+	if (status != EXIT_SUCCESS)
 		return (status);
 	if (cmd_right->str != NULL)
 		status = execout_to_pipe(cmd_right, pipefd);
@@ -30,7 +30,7 @@ int execout_to_pipe(cmd_t *cmd, int pipefd[2])
 {
 	int child_pid;
 	int oldread = pipefd[0];
-	int status = 0;
+	int status = EXIT_SUCCESS;
 
 	pipe(pipefd);
 	child_pid = fork();
@@ -52,7 +52,7 @@ int execout_to_pipe(cmd_t *cmd, int pipefd[2])
 int parent(char *str)
 {
 	int wstatus;
-	int status = 0;
+	int status;
 
 	wait(&wstatus);
 	status = handle_status(wstatus);

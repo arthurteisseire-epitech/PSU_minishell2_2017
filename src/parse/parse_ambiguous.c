@@ -34,5 +34,5 @@ int parse_ambigous(char *str)
 		str += my_strlen(sep[i].str);
 		i = get_index(str);
 	}
-	return (0);
+	return (EXIT_SUCCESS);
 }

@@ -16,5 +16,5 @@ int node_destroy(void *ptr)
 
 	free(cmd->str);
 	free(cmd);
-	return (0);
+	return (EXIT_SUCCESS);
 }

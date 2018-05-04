@@ -24,5 +24,5 @@ int semi_colons(btree_t *root, int pipefd[2])
 	if (root->right != NULL)
 		write_output(root->right->item, pipefd);
 	pipefd[0] = 0;
-	return (0);
+	return (EXIT_SUCCESS);
 }

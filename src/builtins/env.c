@@ -16,7 +16,7 @@ int my_env(char **args)
 		return (EXIT_FAILURE);
 	}
 	disp_env(environ);
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
 int my_setenv(char **args)
@@ -25,7 +25,7 @@ int my_setenv(char **args)
 
 	if (nb_args == 1) {
 		my_env(args);
-		return (0);
+		return (EXIT_SUCCESS);
 	} else if (nb_args >= 4) {
 		my_puterror("setenv: Too many arguments.\n");
 		return (EXIT_FAILURE);
@@ -37,7 +37,7 @@ int my_setenv(char **args)
 	}
 	if (set_env_value(args[1], args[2], environ) == -1)
 		add_var(&args[1]);
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
 int my_unsetenv(char **args)
@@ -50,7 +50,7 @@ int my_unsetenv(char **args)
 	}
 	index = index_name(args[1], environ);
 	rm_arrelem((void *)environ, index, NULL);
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
 int add_var(char **args)
@@ -63,5 +63,5 @@ int add_var(char **args)
 	if (environ[i] == NULL)
 		return (EXIT_FAILURE);
 	environ[i + 1] = NULL;
-	return (0);
+	return (EXIT_SUCCESS);
 }

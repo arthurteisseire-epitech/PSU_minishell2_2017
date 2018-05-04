@@ -22,23 +22,3 @@ int main(int ac, char **av)
 	status = run();
 	return (status % 256);
 }
-
-int maino(int ac, char **av)
-{
-	int pipefd[0];
-
-	pipefd[0] = 0;
-	if (ac != 2)
-		return (84);
-	exec(av[1], pipefd);
-	return (0);
-}
-
-int print_node(btree_t *root)
-{
-	cmd_t *this = root->item;
-
-	bufferize(this->str);
-	bufferize("\n");
-	return (0);
-}

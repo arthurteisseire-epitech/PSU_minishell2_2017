@@ -21,6 +21,7 @@ int my_exit(char **array)
 		my_putstr("exit: Expression Syntax.\n");
 		return (EXIT_FAILURE);
 	}
-	exit(my_atoi(array[1]));
 	my_putstr("exit\n");
+	exit(my_atoi(array[1]));
+	return (EXIT_SUCCESS);
 }

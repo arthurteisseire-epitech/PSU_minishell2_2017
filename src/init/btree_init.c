@@ -23,7 +23,7 @@ int btree_init(btree_t **root, char *str)
 		return (EXIT_FAILURE);
 	if (btree_apply_last(*root, btree_fill) == -1)
 		return (EXIT_FAILURE);
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
 int btree_fill(btree_t *root)
@@ -36,7 +36,7 @@ int btree_fill(btree_t *root)
 		root->right = btree_new_node(this, i, get_next_to);
 		this->exec = sep[i].f;
 		free_and_set((void **)&this->str, NULL, free);
-		return (0);
+		return (EXIT_SUCCESS);
 	}
 	return (2);
 }

@@ -14,7 +14,7 @@ int redir1_right(btree_t *root, int pipefd[2])
 {
 	cmd_t *cmd_right = root->right->item;
 	cmd_t *cmd_left = root->left->item;
-	int status = 0;
+	int status = EXIT_SUCCESS;
 
 	if (cmd_left->str != NULL)
 		status = execout_to_pipe(cmd_left, pipefd);
@@ -26,7 +26,7 @@ int redir2_right(btree_t *root, int pipefd[2])
 {
 	cmd_t *cmd_right = root->right->item;
 	cmd_t *cmd_left = root->left->item;
-	int status = 0;
+	int status = EXIT_SUCCESS;
 
 	if (cmd_left->str != NULL)
 		status = execout_to_pipe(cmd_left, pipefd);
@@ -39,7 +39,7 @@ int redir1_left(btree_t *root, int pipefd[2])
 	cmd_t *cmd_left = root->left->item;
 	cmd_t *cmd_right = root->right->item;
 	int fd = open(cmd_right->str, O_RDONLY);
-	int status = 0;
+	int status = EXIT_SUCCESS;
 
 	if (fd < 0) {
 		my_perror(cmd_right->str);
@@ -56,7 +56,7 @@ int redir2_left(btree_t *root, int pipefd[2])
 	cmd_t *cmd_left = root->left->item;
 	char *line;
 	char *res = NULL;
-	int status = 0;
+	int status = EXIT_SUCCESS;
 
 	my_putstr("? ");
 	line = gnl(0);

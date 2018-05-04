@@ -43,9 +43,9 @@ static int wrong_arch(char *arg)
 		my_putstr(": ");
 		my_putstr(strerror(ENOEXEC));
 		my_putstr(". Wrong Architecture.\n");
-		return (1);
+		return (EXIT_FAILURE);
 	}
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
 static int right_ok(char *pathname)
@@ -83,5 +83,5 @@ int exec_cmd(char *cmd)
 		my_putstr(": Command not found.\n");
 		return (free_array(array), EXIT_FAILURE);
 	}
-	return (free_array(array), 0);
+	return (free_array(array), EXIT_SUCCESS);
 }

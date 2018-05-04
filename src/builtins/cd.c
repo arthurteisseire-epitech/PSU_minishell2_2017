@@ -53,5 +53,5 @@ int cd(char **args)
 	else
 		status = chdir(args[1]);
 	status == -1 ? my_perror(args[1]) : set_env_pwd();
-	return (status == -1 ? 1 : status);
+	return (status == -1 ? EXIT_FAILURE : status);
 }

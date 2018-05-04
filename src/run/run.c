@@ -25,7 +25,7 @@ int handle_status(int wstatus)
 #endif
 	if (WIFEXITED(wstatus))
 		return (WEXITSTATUS(wstatus));
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
 int fork_and_exec(char *cmd)
@@ -51,7 +51,7 @@ int fork_and_exec(char *cmd)
 int run(void)
 {
 	int pipefd[2];
-	int status = 0;
+	int status = EXIT_SUCCESS;
 
 	my_putstr("$> ");
 	for (char *line = gnl(0); !call_exit(line); line = gnl(0)) {
