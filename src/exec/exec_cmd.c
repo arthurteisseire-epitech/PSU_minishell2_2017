@@ -21,7 +21,7 @@ static int exec_with_path(char **args)
 	int i = 0;
 
 	if (!path)
-		return (ERROR);
+		return (EXIT_FAILURE);
 	paths = split(path, ":");
 	while (paths[i] != NULL) {
 		cmd = concat(my_strdup(paths[i]), "/", 1);
@@ -33,7 +33,7 @@ static int exec_with_path(char **args)
 	}
 	free_array(paths);
 	free(path);
-	return (ERROR);
+	return (EXIT_FAILURE);
 }
 
 static int wrong_arch(char *arg)
@@ -64,24 +64,24 @@ static int right_ok(char *pathname)
 
 int exec_cmd(char *cmd)
 {
-	int status = ERROR;
+	int status = EXIT_FAILURE;
 	char **array = split(cmd, " \t");
 
 	if (array == NULL)
-		return (free_array(array), ERROR);
+		return (free_array(array), EXIT_FAILURE);
 	if (array[0] && access(array[0], F_OK) != -1) {
 		if (!right_ok(array[0]))
-			return (free_array(array), ERROR);
+			return (free_array(array), EXIT_FAILURE);
 		status = execve(array[0], array, environ);
 	}
 	if (wrong_arch(array[0]))
-		return (free_array(array), ERROR);
-	if (status == ERROR && my_strcmp(array[0], "") != 0)
+		return (free_array(array), EXIT_FAILURE);
+	if (status == EXIT_FAILURE && my_strcmp(array[0], "") != 0)
 		status = exec_with_path(array);
-	if (status == ERROR && array[0] != NULL) {
+	if (status == EXIT_FAILURE && array[0] != NULL) {
 		my_putstr(array[0]);
 		my_putstr(": Command not found.\n");
-		return (free_array(array), ERROR);
+		return (free_array(array), EXIT_FAILURE);
 	}
 	return (free_array(array), 0);
 }

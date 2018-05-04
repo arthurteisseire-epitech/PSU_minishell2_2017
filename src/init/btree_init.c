@@ -5,6 +5,7 @@
 ** by Arthur Teisseire
 */
 
+#include <stdlib.h>
 #include "btree.h"
 #include "my.h"
 #include "mysh.h"
@@ -16,12 +17,12 @@ int btree_init(btree_t **root, char *str)
 	cmd_t *cmd = new_cmd(my_strdup(str));
 
 	if (cmd == NULL)
-		return (ERROR);
+		return (EXIT_FAILURE);
 	*root = btree_create_node(cmd);
 	if (root == NULL)
-		return (ERROR);
+		return (EXIT_FAILURE);
 	if (btree_apply_last(*root, btree_fill) == -1)
-		return (ERROR);
+		return (EXIT_FAILURE);
 	return (0);
 }
 

@@ -40,11 +40,11 @@ int cd(char **args)
 	int status;
 
 	if (args == NULL || args[0] == NULL)
-		return (ERROR);
+		return (EXIT_FAILURE);
 	i += my_arrlen((void **)args);
 	if (i > 2) {
 		my_puterror("cd: Too many arguments.\n");
-		return (ERROR);
+		return (EXIT_FAILURE);
 	}
 	if (i == 1)
 		status = chdir(get_env_value("HOME", environ));

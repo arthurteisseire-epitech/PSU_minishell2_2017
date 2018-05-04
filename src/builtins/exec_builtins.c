@@ -23,7 +23,7 @@ int exec_builtins(char *cmd)
 	int status;
 
 	if (array == NULL)
-		return (ERROR);
+		return (EXIT_FAILURE);
 	for (int i = 0; i < NB_BUILTINS; i++)
 		if (my_strcmp(builtins[i].name, array[0]) == 0) {
 			status = builtins[i].f(array);

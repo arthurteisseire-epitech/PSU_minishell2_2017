@@ -35,7 +35,7 @@ int execout_to_pipe(cmd_t *cmd, int pipefd[2])
 	pipe(pipefd);
 	child_pid = fork();
 	if (child_pid == -1)
-		return (ERROR);
+		return (EXIT_FAILURE);
 	if (child_pid == 0) {
 		dup2(oldread, 0);
 		dup2(pipefd[1], 1);

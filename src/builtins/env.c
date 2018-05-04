@@ -13,7 +13,7 @@ int my_env(char **args)
 {
 	if (args[1] != NULL) {
 		my_puterror("No argument for env, thanks\n");
-		return (ERROR);
+		return (EXIT_FAILURE);
 	}
 	disp_env(environ);
 	return (0);
@@ -28,12 +28,12 @@ int my_setenv(char **args)
 		return (0);
 	} else if (nb_args >= 4) {
 		my_puterror("setenv: Too many arguments.\n");
-		return (ERROR);
+		return (EXIT_FAILURE);
 	}
 	if (!my_str_isalphanum(args[1])) {
 		my_puterror("setenv: Variable name must contain "
 		"alphanumeric characters.\n");
-		return (ERROR);
+		return (EXIT_FAILURE);
 	}
 	if (set_env_value(args[1], args[2], environ) == -1)
 		add_var(&args[1]);
@@ -46,7 +46,7 @@ int my_unsetenv(char **args)
 
 	if (my_arrlen((void *)args) == 1) {
 		my_puterror("unsetenv: Too few arguments.\n");
-		return (ERROR);
+		return (EXIT_FAILURE);
 	}
 	index = index_name(args[1], environ);
 	rm_arrelem((void *)environ, index, NULL);
@@ -61,7 +61,7 @@ int add_var(char **args)
 		i++;
 	environ[i] = array_to_str(args, "=");
 	if (environ[i] == NULL)
-		return (ERROR);
+		return (EXIT_FAILURE);
 	environ[i + 1] = NULL;
 	return (0);
 }

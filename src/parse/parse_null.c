@@ -16,7 +16,7 @@ int parse_null(btree_t *root)
 	if (this->exec != NULL && this->exec != semi_colons) {
 		if (root->right == NULL || root->left == NULL) {
 			my_putstr("Invalid null command.\n");
-			return (ERROR);
+			return (EXIT_FAILURE);
 		}
 	}
 	return (0);

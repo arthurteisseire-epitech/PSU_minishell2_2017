@@ -37,7 +37,7 @@ int fork_and_exec(char *cmd)
 	if (status == 2) {
 		child_pid = fork();
 		if (child_pid < 0)
-			return (ERROR);
+			return (EXIT_FAILURE);
 		if (child_pid == 0) {
 			exit(exec_cmd(cmd));
 		} else {
