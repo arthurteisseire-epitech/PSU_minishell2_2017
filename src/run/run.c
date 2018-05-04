@@ -13,7 +13,6 @@
 
 int handle_status(int wstatus)
 {
-#ifdef WCOREDUMP
 	if (WTERMSIG(wstatus) == SEGFAULT) {
 		my_putstr("Segmentation fault\n");
 		return (139);
@@ -22,7 +21,6 @@ int handle_status(int wstatus)
 		my_putstr("Floating exception\n");
 		return (136);
 	}
-#endif
 	if (WIFEXITED(wstatus))
 		return (WEXITSTATUS(wstatus));
 	return (EXIT_SUCCESS);
