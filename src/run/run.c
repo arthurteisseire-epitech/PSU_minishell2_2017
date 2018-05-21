@@ -51,13 +51,13 @@ int run(void)
 	int pipefd[2];
 	int status = EXIT_SUCCESS;
 
-	my_putstr("$> ");
+	print_prompt();
 	for (char *line = gnl(0); !call_exit(line); line = gnl(0)) {
 		pipefd[0] = 0;
 		pipefd[1] = 0;
 		status = exec(line, pipefd);
 		free(line);
-		my_putstr("$> ");
+		print_prompt();
 	}
 	return (status);
 }

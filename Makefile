@@ -34,6 +34,7 @@ SRC     =	$(DSRC)main.c			\
 		$(DEXEC)semi_colons.c		\
 		$(DMYSH)run.c			\
 		$(DMYSH)my_perror.c		\
+		$(DMYSH)prompt.c		\
 		$(DBUILTS)env.c			\
 		$(DBUILTS)my_exit.c		\
 		$(DBUILTS)cd.c			\

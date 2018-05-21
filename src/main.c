@@ -13,7 +13,7 @@
 void sighandler(int __attribute((unused))sig)
 {
 	my_putchar('\n');
-	my_putstr("$> ");
+	print_prompt();
 }
 
 int main(int ac, char **av)

@@ -45,5 +45,6 @@ void my_perror(char *str);
 int handle_status(int wstatus);
 int node_destroy(void *ptr);
 int get_index(char *str);
+void print_prompt(void);
 
 #endif

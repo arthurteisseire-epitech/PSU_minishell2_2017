@@ -15,10 +15,11 @@ static char *get_path(void)
 
 	for (int i = 0; i < 4096; i++)
 		buff[i] = '\0';
-	if ((path = my_strdup(getcwd(buff, sizeof(buff)))) != NULL)
-		return (path);
-	my_puterror("Path too long.\n");
-	return (NULL);
+	path = getcwd(buff, sizeof(buff));
+	if (path == NULL)
+		return (NULL);
+	path = my_strdup(path);
+	return (path);
 }
 
 static void set_env_pwd(void)
@@ -36,17 +37,17 @@ static void set_env_pwd(void)
 
 int cd(char **args)
 {
-	int i = 0;
+	int len;
 	int status;
 
 	if (args == NULL || args[0] == NULL)
 		return (EXIT_FAILURE);
-	i += my_arrlen((void **)args);
-	if (i > 2) {
+	len = my_arrlen((void **)args);
+	if (len > 2) {
 		my_puterror("cd: Too many arguments.\n");
 		return (EXIT_FAILURE);
 	}
-	if (i == 1)
+	if (len == 1)
 		status = chdir(get_env_value("HOME", environ));
 	else if (my_strcmp(args[1], "-") == 0)
 		status = chdir(get_env_value("OLDPWD", environ));
