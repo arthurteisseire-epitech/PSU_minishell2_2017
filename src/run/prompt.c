@@ -23,7 +23,10 @@ void print_prompt(void)
 		tmp = my_strstr(tmp, "/");
 	}
 	bufferize("[");
-	bufferize(curr_dir);
+	if (curr_dir[0] == '\0')
+		bufferize("/");
+	else
+		bufferize(curr_dir);
 	bufferize("]$ ");
 	bufferize(NULL);
 }
