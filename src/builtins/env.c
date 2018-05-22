@@ -21,18 +21,21 @@ int my_env(char **args)
 
 int my_setenv(char **args)
 {
-	int nb_args = my_arrlen((void *)args);
-
-	if (nb_args == 1) {
+	if (my_arrlen((void *)args) == 1) {
 		my_env(args);
 		return (EXIT_SUCCESS);
-	} else if (nb_args >= 4) {
+	} else if (my_arrlen((void *)args) >= 4) {
 		my_puterror("setenv: Too many arguments.\n");
 		return (EXIT_FAILURE);
 	}
 	if (!my_str_isalphanum(args[1])) {
 		my_puterror("setenv: Variable name must contain "
 		"alphanumeric characters.\n");
+		return (EXIT_FAILURE);
+	}
+	if (args[1][0] > '0' && args[1][0] < '9') {
+		my_puterror("setenv: Variable name must"
+		" begin with a letter.\n");
 		return (EXIT_FAILURE);
 	}
 	if (set_env_value(args[1], args[2], environ) == -1)
