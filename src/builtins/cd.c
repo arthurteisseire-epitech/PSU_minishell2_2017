@@ -53,6 +53,6 @@ int cd(char **args)
 		status = chdir(get_env_value("OLDPWD", environ));
 	else
 		status = chdir(args[1]);
-	status == -1 ? my_perror(args[1]) : set_env_pwd();
+	status == -1 ? my_putstr("No such file or directory\n") : set_env_pwd();
 	return (status == -1 ? EXIT_FAILURE : status);
 }
