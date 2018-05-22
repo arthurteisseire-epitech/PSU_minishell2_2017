@@ -43,7 +43,7 @@ SRC     =	$(DSRC)main.c			\
 		$(DPARSE)parse_ambiguous.c	\
 		$(DPARSE)parse_null.c		\
 		$(DPARSE)get_sep.c
-CFLAGS	+=	-Wall -W -Wextra -I$(INC) -g
+CFLAGS	+=	-Wall -W -Wextra -I$(INC)
 OBJ	=	$(SRC:.c=.o)
 NAME	=	mysh
 
